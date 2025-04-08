@@ -1,6 +1,6 @@
 "use client";
 
-import { LeftTable } from "@/component/LeftTable";
+import { LeftTable } from "../_component_/LeftTable";
 import { useRouter } from "next/navigation";
 
 export default function UserName() {
