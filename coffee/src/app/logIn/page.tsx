@@ -39,7 +39,7 @@ export default function LogIn() {
                 className="w-full px-3 py-2 border rounded"
               />
             </div>
-            <Button className="w-full bg-[black] text-white py-2 rounded">
+            <Button className="w-full bg-[black] text-white py-2 rounded" onClick={() => router.push("/create_profile")}>
               Continue
             </Button>
           </div>
