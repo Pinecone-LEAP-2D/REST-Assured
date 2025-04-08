@@ -14,7 +14,7 @@ export default function Email_And_Pass() {
         <div className="w-1/2 h-full">
           <LeftSide />
         </div>
-        <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">
+        <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">  
           <Button
             className="absolute top-8 right-8 bg-gray-100 px-4 py-1 rounded-md text-[black]"
             onClick={() => router.push("/login")}
@@ -41,7 +41,7 @@ export default function Email_And_Pass() {
                 className="w-full px-3 py-2 border rounded"
               />
             </div>
-            <Button className="w-full bg-[black] text-white py-2 rounded">
+            <Button className="w-full bg-[black] text-white py-2 rounded" onClick={() => router.push("/create_profile")}>
               Continue
             </Button>
           </div>
