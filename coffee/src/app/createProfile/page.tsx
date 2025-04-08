@@ -1,7 +1,11 @@
+"use client";
 import { AvatarImg } from "@/components/AvatarImg";
+import { Loading } from "@/components/loading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
+import { ChangeEvent, useState } from "react";
 
 const createProfile = () => {
   return (
@@ -14,13 +18,21 @@ const createProfile = () => {
         </div>
         <div className="w-full">
           <p>Name</p>
-          <Input type="text" placeholder="Enter your name here"/>
+          <Input type="text" placeholder="Enter your name here" />
           <p>About</p>
-          <Textarea placeholder="Write about yourself here" className="h-[131px]"/>
+          <Textarea
+            placeholder="Write about yourself here"
+            className="max-h-[131px]"
+          />
           <p>Social media URL</p>
           <Input type="URL" placeholder="https://" />
         </div>
-        <Button className="bg-grey-500"/>
+        <div className="w-full flex justify-end">
+          <Button className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer">
+            {" "}
+            Continue{" "}
+          </Button>
+        </div>
       </div>
     </div>
   );
