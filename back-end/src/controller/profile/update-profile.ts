@@ -7,9 +7,8 @@ export const updateProfile = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    // Update the profile
     const updatedProfile = await prisma.profile.update({
-      where: { id: Number(id) }, // Specify the profile to update by ID
+      where: { id: Number(id) },
       data: {
         avatarImage: avatarImage,
         name: name,
@@ -20,14 +19,12 @@ export const updateProfile = async (req: Request, res: Response) => {
       },
     });
 
-    // Send a success response
     res.status(200).json({
       success: true,
       message: "Successfully updated profile",
-      profileInfo: updatedProfile, // Return the updated profile info
+      profileInfo: updatedProfile,
     });
   } catch (error) {
-    // Handle the error properly
     res.status(500).json({
       success: false,
       message: "Failed to update profile",
