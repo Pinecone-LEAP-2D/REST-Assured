@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") // using Accelerate URL for Prisma
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -13,16 +13,14 @@ model User {
   password          String
   username          String     @unique
   receivedDonations Donation[] @relation("UserReceivedDonations")
-  profileId         Int?      @unique
-  profile           Profile?  @relation(fields: [profileId], references: [id])
+  profile           Profile?
+  bankCardId        Int?       @unique
+  bankCard          BankCard?  @relation(fields: [bankCardId], references: [id])
 
-  bankCardId        Int?      @unique
-  bankCard          BankCard? @relation(fields: [bankCardId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
-
-  sentDonations     Donation[] @relation("UserSentDonations")
+  sentDonations Donation[] @relation("UserSentDonations")
 }
 
 model Profile {
@@ -36,7 +34,8 @@ model Profile {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  user            User?
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model BankCard {
@@ -49,7 +48,7 @@ model BankCard {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  user       User?
+  user User?
 }
 
 model Donation {
