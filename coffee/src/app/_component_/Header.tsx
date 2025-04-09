@@ -9,7 +9,7 @@ export const Header = () => {
       <div className="w-full h-[56px] flex justify-between items-center p-8 sticky">
         <div className="flex justify-start gap-2">
           <Coffee />
-          <span className="text-base font-bold font-['Inter'] leading-tight">
+          <span className="text-base font-bold leading-tight">
             Buy Me Coffee
           </span>
         </div>
