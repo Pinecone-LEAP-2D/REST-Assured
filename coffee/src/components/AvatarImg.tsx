@@ -13,10 +13,11 @@ const API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/
 
 type AvatarImgProps = {
   className?: string;
-}
+};
 export const AvatarImg = ({ className }: AvatarImgProps) => {
   const [data, setData] = useState<File | null>(null);
   const [previewImg, setPreviewImg] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
 
   const handleUploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e?.target?.files;
@@ -32,6 +33,8 @@ export const AvatarImg = ({ className }: AvatarImgProps) => {
   };
 
   const UploadCloudinary = async () => {
+    setLoading(true);
+    setData(null);
     if (!data) {
       alert("Please insert a photo");
       return;
@@ -52,6 +55,8 @@ export const AvatarImg = ({ className }: AvatarImgProps) => {
     } catch (error) {
       console.log("Error uploading to Cloudinary:", error);
       alert("Failed to upload image.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,27 +69,46 @@ export const AvatarImg = ({ className }: AvatarImgProps) => {
             htmlFor="img"
             className="h-40 w-40 flex justify-center items-center"
           >
-            <Camera stroke="grey" />
-            <Input
-              onChange={handleUploadImg}
-              id="img"
-              type="file"
-              className="hidden"
-            />
+            {loading ? (
+              <div className="w-10 h-10 border-l-[2px] border-t-[2px] border-black rounded-full animate-spin"></div>
+            ) : (
+              <>
+                {" "}
+                <Camera stroke="grey" />
+                <Input
+                  onChange={handleUploadImg}
+                  id="img"
+                  type="file"
+                  className="hidden"
+                />
+              </>
+            )}
           </label>
         </AvatarFallback>
       </Avatar>
 
-    
       {!data || (
-        <div className="absolute z-40 inset-0 flex justify-center items-center">
-          <div className="bg-opacity-20 p-4 rounded-lg bg-white flex justify-center items-center space-x-4 h-[200px] w-[300px]">
-            <div>
-              <h3 className="">Change profile</h3>
-              <div className="flex justify-center space-x-4 mt-2">
-                <Button onClick={() => setData(null)}>Cancel</Button>
-                <Button onClick={UploadCloudinary}>OK</Button>
-              </div>
+        <div className="absolute z-40 inset-0 flex justify-center items-center bg-opacity-50 bg-[#6B728030]">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full flex flex-col items-center space-y-4">
+            <h3 className="text-xl font-semibold text-gray-800">
+              Change Profile
+            </h3>
+            <div className="text-center text-gray-600">
+              <p>Are you sure you want to update your profile?</p>
+            </div>
+            <div className="flex justify-center space-x-6 mt-4">
+              <Button
+                onClick={() => setData(null)}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-full transition-all duration-200"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={UploadCloudinary}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition-all duration-200"
+              >
+                OK
+              </Button>
             </div>
           </div>
         </div>
