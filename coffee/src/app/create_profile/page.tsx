@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Header } from "../_component_/Header";
+import { useRouter } from "next/navigation";
 
 import { ChangeEvent, useState } from "react";
 
 const createProfile = () => {
+  const router = useRouter();
   return (
     <>
       <Header />
@@ -31,7 +33,7 @@ const createProfile = () => {
             <Input type="URL" placeholder="https://" />
           </div>
           <div className="w-full flex justify-end">
-            <Button className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer">
+            <Button className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer" onClick={() => router.push("/home")}>
               {" "}
               Continue{" "}
             </Button>
