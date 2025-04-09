@@ -7,6 +7,17 @@ export const updateProfile = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
+    const Existingprofile = await prisma.profile.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!Existingprofile) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to update profile",
+      });
+    }
+
     const updatedProfile = await prisma.profile.update({
       where: { id: Number(id) },
       data: {
@@ -15,7 +26,7 @@ export const updateProfile = async (req: Request, res: Response) => {
         about: about,
         socialMediaURL: socialMediaURL,
         backgroundImage: backgroundImage || "",
-        userId: userId,
+        userId: Number(userId),
       },
     });
 
