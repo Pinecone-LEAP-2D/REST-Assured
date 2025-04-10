@@ -4,10 +4,30 @@ import { LeftSide } from "@/app/_component_/LeftSide";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { use, useEffect, useState } from "react";
+import { useCreateAccount } from "@/providers/CreateAccountProvider";
 
 export default function Email_And_Pass() {
+  const { createAccount, setCreateAccount, refetch } = useCreateAccount();
+    const [formValue, setFormValue ] = useState<CreateAccount>({username : createAccount.username});
   const router = useRouter();
 
+  useEffect(() => {
+    setCreateAccount(formValue)
+   
+  },[formValue])
+  useEffect(() => {
+    if(formValue.username === null){
+      router.push("/sign_up")
+    }
+  })
+
+  const onEmailChange = (e: { target: { value: string; }; }) =>{
+    setFormValue((prev) => ({...prev , email : e.target.value}) )
+  }
+  const onPasswordChange = (e: { target: { value: string; }; }) => {
+    setFormValue((prev) => ({...prev , password : e.target.value}) )
+  }
   return (
     <>
       <div className="w-screen h-screen flex">
@@ -23,7 +43,7 @@ export default function Email_And_Pass() {
           </Button>
           <div className="w-[320px]">
             <h2 className="text-[black] font-semibold mb-4">
-              Welcome, *Enter User Here*{" "}
+              Welcome, {formValue.username}
             </h2>
             <div className="mb-3">
               <label className="block text-[black] mb-1">Email</label>
@@ -31,6 +51,7 @@ export default function Email_And_Pass() {
                 type="email"
                 placeholder="Enter email here"
                 className="w-full px-3 py-2 border rounded"
+                onChange={onEmailChange}
               />
             </div>
             <div className="mb-4">
@@ -39,9 +60,10 @@ export default function Email_And_Pass() {
                 type="password"
                 placeholder="Enter password here"
                 className="w-full px-3 py-2 border rounded"
+                onChange={onPasswordChange}
               />
             </div>
-            <Button className="w-full bg-[black] text-white py-2 rounded" onClick={() => router.push("/create_profile")}>
+            <Button className="w-full bg-[black] text-white py-2 rounded" onClick={() => refetch()}>
               Continue
             </Button>
           </div>
