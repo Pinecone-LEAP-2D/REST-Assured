@@ -28,3 +28,8 @@ app.listen(port, () => {
 // 4. git add .
 // 5. git rebase --continue
 // 6. git push origin HEAD -f
+
+// Prisma migrate
+
+// 1. npx prisma migrate dev
+// 2. npx prisma migrate reset
