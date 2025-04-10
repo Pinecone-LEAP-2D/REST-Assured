@@ -1,33 +1,41 @@
 import { Request, Response } from "express";
 import prisma from "../../prismaClient";
+import { connect } from "http2";
 
 export const postDonation = async (req: Request, res: Response) => {
-  const { userId } = req.params;
-  const { amount, specialMessage, socialURLOrBuyMeACoffee, donor, recipient } =
-    req.body;
+  const {
+    amount,
+    specialMessage,
+    socialURLOrBuyMeACoffee,
+    donorId,
+    recipientId,
+  } = req.body;
+
   try {
     const donation = await prisma.donation.create({
-      where: { userId: Number(userId) },
       data: {
-        amount: amount,
-        specialMessage: specialMessage,
-        socialURLOrBuyMeACoffee: socialURLOrBuyMeACoffee,
-        donor: donor,
-        recipient: recipient,
-
-        // successMessage: "Profile created successfully"
+        amount,
+        specialMessage,
+        socialURLOrBuyMeACoffee,
+        donor: {
+          connect: donorId,
+        },
+        recipient: {
+          connect: recipientId,
+        },
       },
     });
+
     res.status(201).json({
       success: true,
-      message: "Succesfully created donation",
-      donation: donation,
+      message: "Successfully created donation",
+      donation,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to add donation",
-      error: error,
+      error,
     });
   }
 };
