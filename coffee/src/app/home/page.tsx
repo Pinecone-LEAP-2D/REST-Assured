@@ -1,29 +1,18 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { HeaderH } from "../_component_/HeaderH";
-import { ExternalLink } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Copy } from "lucide-react";
 import { Line } from "../_component_/Line";
 import { Date } from "../_component_/Date";
 import { AmountBox } from "../_component_/AmountBox";
+import { Buttons } from "../_component_/Buttons";
 const Home = () => {
   return (
     <div className="w-full h-[4000pxx] relative">
       <HeaderH />
       <div className="w-[251px] h-auto inline-flex flex-col justify-start items-start gap-1 pl-[80px]">
-        <Button className="w-[250px] bg-[#F4F4F5] text-black justify-start cursor-pointer">
-          Home
-        </Button>
-        <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer">
-          Explore
-        </Button>
-        <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer">
-          View page <ExternalLink />{" "}
-        </Button>
-        <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer">
-          Account settings
-        </Button>
+        <Buttons />
       </div>
       <div className="w-[955px] h-auto pl-[24px] pr-[24px] inline-flex flex-col justify-start items-start gap-6 absolute left-[429px]">
         <div className="w-[907px] h-auto p-6 rounded-lg outline border-[#E4E4E7] inline-flex flex-col justify-start items-start gap-3 absolute">
