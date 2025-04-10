@@ -2,9 +2,19 @@
 import { LeftTable } from "../_component_/LeftTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useCreateAccount } from "@/providers/CreateAccountProvider";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 export default function SignUp() {
+  const { createAccount, setCreateAccount } = useCreateAccount();
+  const [formValue, setFormValue] = useState<string>("");
   const router = useRouter();
+  useEffect(() => {
+    setCreateAccount({ username: formValue });
+  }, [formValue]);
+  const onUserNameChange = (e: { target: { value: string } }) => {
+    setFormValue(e.target.value);
+  };
   return (
     <>
       <div className="w-screen h-screen flex">
@@ -32,10 +42,18 @@ export default function SignUp() {
                 <span className="text-sm font-medium font-['Inter'] leading-none">
                   Username
                 </span>
-                <Input placeholder="Enter username here" />
+                <Input
+                  placeholder="Enter username here"
+                  onChange={onUserNameChange}
+                />
               </div>
               <div className="mt-[24px]">
-                <Button className="w-[320px] cursor-pointer" onClick={() => router.push("/sign_up/email_and_pass")}>Continue</Button>
+                <Button
+                  className="w-[320px] cursor-pointer"
+                  onClick={() => router.push("/sign_up/email_and_pass")}
+                >
+                  Continue
+                </Button>
               </div>
             </div>
           </div>
