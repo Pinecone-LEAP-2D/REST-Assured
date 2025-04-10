@@ -1,4 +1,6 @@
 "use client";
+
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type CreateAccount = {
@@ -22,12 +24,13 @@ export const CreateAccountProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const router = useRouter()
   const [createAccount, setCreateAccount] = useState<CreateAccount>({
     email: null,
     password: null,
     username: null,
   });
-  console.log(createAccount);
+
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:4000/users", {
@@ -43,10 +46,15 @@ export const CreateAccountProvider = ({
       });
 
       const data = await response.json();
-      console.log(data);
+      localStorage.setItem('token' , data.token)
+  
+      if(data) {
+        router.push("/create_profile")
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+    
   };
 
   return (
@@ -61,9 +69,7 @@ export const CreateAccountProvider = ({
 export const useCreateAccount = () => {
   const context = useContext(CreateAccountContext);
   if (!context) {
-    throw new Error(
-      "useCreateAccount must be used within a CreateAccountProvider"
-    );
+    throw new Error("useCreateProfile must be used within a CreateProfileProvider");
   }
   return context;
 };

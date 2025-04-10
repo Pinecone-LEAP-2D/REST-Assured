@@ -9,32 +9,33 @@ import { useCreateAccount } from "@/providers/CreateAccountProvider";
 
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch } = useCreateAccount();
-    const [formValue, setFormValue ] = useState<CreateAccount>({username : createAccount.username});
+  const [formValue, setFormValue] = useState<CreateAccount>({
+    username: createAccount.username,
+  });
   const router = useRouter();
 
   useEffect(() => {
-    setCreateAccount(formValue)
-   
-  },[formValue])
+    setCreateAccount(formValue);
+  }, [formValue]);
   useEffect(() => {
-    if(formValue.username === null){
-      router.push("/sign_up")
+    if (formValue.username === null) {
+      router.push("/sign_up");
     }
-  })
+  });
 
-  const onEmailChange = (e: { target: { value: string; }; }) =>{
-    setFormValue((prev) => ({...prev , email : e.target.value}) )
-  }
-  const onPasswordChange = (e: { target: { value: string; }; }) => {
-    setFormValue((prev) => ({...prev , password : e.target.value}) )
-  }
+  const onEmailChange = (e: { target: { value: string } }) => {
+    setFormValue((prev) => ({ ...prev, email: e.target.value }));
+  };
+  const onPasswordChange = (e: { target: { value: string } }) => {
+    setFormValue((prev) => ({ ...prev, password: e.target.value }));
+  };
   return (
     <>
       <div className="w-screen h-screen flex">
         <div className="w-1/2 h-full">
           <LeftSide />
         </div>
-        <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">  
+        <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">
           <Button
             className="absolute top-8 right-8 bg-gray-100 px-4 py-1 rounded-md text-[black]"
             onClick={() => router.push("/login")}
@@ -63,7 +64,10 @@ export default function Email_And_Pass() {
                 onChange={onPasswordChange}
               />
             </div>
-            <Button className="w-full bg-[black] text-white py-2 rounded" onClick={() => refetch()}>
+            <Button
+              className="w-full bg-[black] text-white py-2 rounded"
+              onClick={() => refetch()}
+            >
               Continue
             </Button>
           </div>

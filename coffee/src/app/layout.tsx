@@ -1,5 +1,7 @@
 import { CreateAccountProvider } from "@/providers/CreateAccountProvider";
 import "./globals.css";
+import { CreateProfileProvider } from "@/providers/CreateProfileProvider";
+import { AuthenticationProvider } from "@/providers/AuthenticationProvider";
 
 export default function RootLayout({
   children,
@@ -9,7 +11,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CreateAccountProvider>{children}</CreateAccountProvider>
+        <AuthenticationProvider>
+          <CreateProfileProvider>
+            <CreateAccountProvider>{children}</CreateAccountProvider>
+          </CreateProfileProvider>
+        </AuthenticationProvider>
       </body>
     </html>
   );
