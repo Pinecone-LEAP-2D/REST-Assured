@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import prisma from "../../prismaClient";
-import { connect } from "http2";
 
 export const postDonation = async (req: Request, res: Response) => {
   const {
@@ -18,11 +17,14 @@ export const postDonation = async (req: Request, res: Response) => {
         specialMessage,
         socialURLOrBuyMeACoffee,
         donor: {
-          connect: donorId,
+          connect: { id: donorId },
         },
         recipient: {
-          connect: recipientId,
+          connect: { id: recipientId },
         },
+        // donorId: donorId,
+        // recipientId: recipientId,
+        // 2 uula ajilan
       },
     });
 

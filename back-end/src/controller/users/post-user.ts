@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import prisma from "../../prismaClient";
 import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 export const postUser = async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
@@ -41,11 +42,22 @@ export const postUser = async (req: Request, res: Response) => {
         password: hashedPassword,
       },
     });
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+    const token = jwt.sign(
+      { id: user?.id, email: user?.email, username: user?.username },
+      process.env.JWT_SECRET || "your_default_secret_key",
+      { expiresIn: "78h" }
+    );
 
     res.status(201).json({
       success: true,
       message: "User created successfully",
       newUser: newUser,
+      token,
     });
   } catch (error) {
     console.log("Error creating user:", error);
