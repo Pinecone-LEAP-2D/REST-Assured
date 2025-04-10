@@ -45,6 +45,8 @@ model BankCard {
   lastName   String
   cardNumber String
   expiryDate DateTime
+  year       Int
+  cvc        Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
