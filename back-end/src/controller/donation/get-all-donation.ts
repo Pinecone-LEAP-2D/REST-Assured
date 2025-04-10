@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../../prismaClient";
 
-export const getALlDonation = async (req: Request, res: Response) => {
+export const getAllDonation = async (req: Request, res: Response) => {
   try {
     const users = await prisma.donation.findMany();
     res.status(200).json({
