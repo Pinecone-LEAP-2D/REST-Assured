@@ -13,3 +13,10 @@ type CreateAccount = {
   password?: string | null;
   username?: string | null
 };
+type CreateProfile = {
+  image?: string | null;
+  name?: string | null;
+  about?: string | null;
+  socialMediaURL?: string | null;
+  userID?: number | null;
+};

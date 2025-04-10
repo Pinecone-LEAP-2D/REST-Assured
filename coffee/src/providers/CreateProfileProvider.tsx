@@ -1,61 +1,64 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState, useCallback, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { useUserData } from "./AuthenticationProvider";
 
-type CreateProfile = {
-  image?: string | null;
-  name?: string | null;
-  about?: string | null;
-  socialMediaURL?: string | null;
-};
-
 type CreateProfileContextType = {
-    createProfile: CreateProfile;
+  createProfile: CreateProfile;
   refetch: () => Promise<void>;
   setCreateProfile: (account: CreateProfile) => void;
   isLoading: boolean;
   error: string | null;
 };
 
-const CreateProfileContext = createContext<CreateProfileContextType | undefined>(undefined);
+const CreateProfileContext = createContext<
+  CreateProfileContextType | undefined
+>(undefined);
 
-export const CreateProfileProvider = ({ children }: { children: React.ReactNode }) => {
-   
-
+export const CreateProfileProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const decodedToken = useUserData();
 
   const [createProfile, setCreateProfile] = useState<CreateProfile>({
     image: null,
     name: null,
     about: null,
     socialMediaURL: null,
+    userID: decodedToken?.id,
   });
-  
+  console.log("decodedToken", createProfile);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData =async () => {
+  const fetchData = async () => {
     setIsLoading(true);
-    setError(null);  
+    setError(null);
     try {
-
       const response = await fetch("http://localhost:4000/profile", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            image: createProfile.image,
-            name: createProfile.name,
-            about: createProfile.about,
-            socialMediaURL: createProfile.socialMediaURL,
-          /*   userID = userData.id */
-            
+          avatarImage: createProfile.image,
+          backgroundImage: null,
+          name: createProfile.name,
+          about: createProfile.about,
+          socialMediaURL: createProfile.socialMediaURL,
+          userId: decodedToken?.id,
         }),
       });
-
-      
 
       const data = await response.json();
       console.log(data);
@@ -64,7 +67,7 @@ export const CreateProfileProvider = ({ children }: { children: React.ReactNode 
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <CreateProfileContext.Provider
@@ -81,10 +84,12 @@ export const CreateProfileProvider = ({ children }: { children: React.ReactNode 
   );
 };
 
-export const useCreateAccount = () => {
+export const useCreateProfile = () => {
   const context = useContext(CreateProfileContext);
   if (!context) {
-    throw new Error("useCreateAccount must be used within a CreateAccountProvider");
+    throw new Error(
+      "useCreateAccount must be used within a CreateAccountProvider"
+    );
   }
   return context;
 };
