@@ -23,6 +23,7 @@ const Home = () => {
               <Avatar>
                 <AvatarImage
                   src="https://github.com/shadcn.png"
+                  className="cursor-pointer"
                   onClick={() => router.push("/donation-C")}
                 />
                 <AvatarFallback>CN</AvatarFallback>
