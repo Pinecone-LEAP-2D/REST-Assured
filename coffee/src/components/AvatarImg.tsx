@@ -30,6 +30,7 @@ export const AvatarImg = ({ className, image, onChange }: AvatarImgProps) => {
   };
 
   const UploadCloudinary = async () => {
+    setData(null)
     if (!data) {
       alert("Please insert a photo");
       return;
@@ -48,7 +49,7 @@ export const AvatarImg = ({ className, image, onChange }: AvatarImgProps) => {
 
       const url = response.data.secure_url;
       setPreviewImg(url);
-      setData(null);
+     
 
       // Send image URL to parent
       if (onChange) onChange(url);
