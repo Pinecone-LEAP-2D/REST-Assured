@@ -7,7 +7,9 @@ import { Line } from "../_component_/_home_/Line";
 import { Date } from "../_component_/_home_/Date";
 import { AmountBox } from "../_component_/_home_/AmountBox";
 import { Buttons } from "../_component_/_home_/Buttons";
+import { useRouter } from "next/navigation";
 const Home = () => {
+  const router = useRouter();
   return (
     <div className="w-full h-[4000pxx] relative">
       <HeaderH />
@@ -19,7 +21,10 @@ const Home = () => {
           <div className="inline-flex justify-between">
             <div className="flex justify-start items-center gap-3">
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  onClick={() => router.push("/donation-C")}
+                />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="inline-flex flex-col justify-center items-start gap-1">
