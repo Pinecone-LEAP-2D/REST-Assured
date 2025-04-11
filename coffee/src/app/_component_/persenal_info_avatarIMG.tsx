@@ -1,25 +1,22 @@
-"use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Camera } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Camera } from "lucide-react";
+import { ChangeEvent, useEffect, useState } from "react";
 
+type AvatarUpdateProps = {
+  avatarImage?: string;
+  onChange?: (url: string) => void;
+};
 const NEXT_PUBLIC_CLOUDINARY_API_KEY = "449676792634373";
 const CLOUDINARY_UPLOAD_PRESET = "H8ahs3";
 const CLOUDINARY_CLOUD_NAME = "dwauz9le4";
 const API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+export const AvatarUpdate = ({ avatarImage , onChange }: AvatarUpdateProps) => {
 
-type AvatarImgProps = {
-  className?: string;
-  image?: string | null;
-  onChange?: (url: string) => void;
-};
-
-export const AvatarImg = ({ className, image, onChange }: AvatarImgProps) => {
   const [data, setData] = useState<File | null>(null);
-  const [previewImg, setPreviewImg] = useState<string | null>(image || null);
+  const [previewImg, setPreviewImg] = useState<string>(avatarImage as string);
   const [loading, setLoading] = useState(false);
 
   const handleUploadImg = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,18 +54,22 @@ export const AvatarImg = ({ className, image, onChange }: AvatarImgProps) => {
       setLoading(false);
     }
   };
-
+  useEffect(() => {
+    if (avatarImage) {
+      setPreviewImg(avatarImage);
+    }
+  }, [avatarImage]);
   return (
     <>
       <label
+        className="h-40 w-40 flex justify-center items-center cursor-pointer "
         htmlFor="img"
-        className="h-40 w-40 flex justify-center items-center cursor-pointer"
       >
-        <Avatar className={className}>
-          <AvatarImage src={previewImg || undefined} />
+        <Avatar className="w-40 h-40">
+          <AvatarImage src={previewImg} />
           <AvatarFallback className="bg-white border-[2px] border-dashed">
-            {loading ? (
-              <div className="w-10 h-10 border-l-[2px] border-t-[2px] border-black rounded-full animate-spin"></div>
+            {!loading ? (
+              <div className="w-10 h-10 border-l-[2px] border-t-[2px] border-black rounded-full animate-spin z-50"></div>
             ) : (
               <>
                 <Camera stroke="grey" />
@@ -83,10 +84,9 @@ export const AvatarImg = ({ className, image, onChange }: AvatarImgProps) => {
           className="hidden"
         />
       </label>
-
       {data && (
-        <div className="absolute z-40 inset-0 flex justify-center items-center bg-opacity-50 bg-[#6B728030]">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full flex flex-col items-center space-y-4">
+        <div className="absolute z-40 inset-0 flex justify-center bg-opacity-50 bg-[#6B728030]">
+          <div className="bg-white h-50 p-6 rounded-lg shadow-lg max-w-md w-full flex flex-col items-center space-y-4">
             <h3 className="text-xl font-semibold text-gray-800">
               Change Profile
             </h3>

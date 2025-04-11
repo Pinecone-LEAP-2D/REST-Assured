@@ -1,7 +1,10 @@
-import { CreateAccountProvider } from "@/providers/CreateAccountProvider";
+import { CreateAccountProvider } from "@/providers/sign_up_login_provider/CreateAccountProvider";
 import "./globals.css";
-import { CreateProfileProvider } from "@/providers/CreateProfileProvider";
+import { CreateProfileProvider } from "@/providers/profile_provider/CreateProfileProvider";
 import { AuthenticationProvider } from "@/providers/AuthenticationProvider";
+import { UpdateProfileProvider } from "@/providers/profile_provider/UpdateProfileProvider";
+import { GetProfileDataProvider } from "@/providers/profile_provider/getProfileDataProvider";
+import { ChangePasswordProvider } from "@/providers/sign_up_login_provider/changePassowordProvider";
 
 export default function RootLayout({
   children,
@@ -13,7 +16,13 @@ export default function RootLayout({
       <body>
         <AuthenticationProvider>
           <CreateProfileProvider>
-            <CreateAccountProvider>{children}</CreateAccountProvider>
+            <UpdateProfileProvider>
+              <ChangePasswordProvider>
+                <GetProfileDataProvider>
+                  <CreateAccountProvider>{children}</CreateAccountProvider>
+                </GetProfileDataProvider>
+              </ChangePasswordProvider>
+            </UpdateProfileProvider>
           </CreateProfileProvider>
         </AuthenticationProvider>
       </body>

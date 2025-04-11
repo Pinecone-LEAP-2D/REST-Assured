@@ -8,7 +8,7 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { useUserData } from "./AuthenticationProvider";
+import { useUserData } from "../AuthenticationProvider";
 
 type CreateProfileContextType = {
   createProfile: CreateProfile;
@@ -28,20 +28,21 @@ export const CreateProfileProvider = ({
   children: React.ReactNode;
 }) => {
   const decodedToken = useUserData();
-
+const router = useRouter()
   const [createProfile, setCreateProfile] = useState<CreateProfile>({
     image: null,
     name: null,
     about: null,
     socialMediaURL: null,
-    userID: decodedToken?.id,
+    userID: null,
   });
-  console.log("decodedToken", createProfile);
+
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
+   
     setIsLoading(true);
     setError(null);
     try {
@@ -59,9 +60,10 @@ export const CreateProfileProvider = ({
           userId: decodedToken?.id,
         }),
       });
-
       const data = await response.json();
-      console.log(data);
+      if(data.success){
+        router.push('/home')
+      }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {

@@ -46,10 +46,10 @@ export const CreateAccountProvider = ({
       });
 
       const data = await response.json();
-      localStorage.setItem('token' , data.token)
-  
-      if(data) {
+    
+      if(data.success) {
         router.push("/create_profile")
+        localStorage.setItem('token' , data.token)
       }
     } catch (error) {
       console.error("Error fetching data:", error);

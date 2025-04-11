@@ -1,7 +1,37 @@
 "use client";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useChangePassword } from "@/providers/sign_up_login_provider/changePassowordProvider";
+import { useState } from "react";
+
 export const Set_New_Pass = () => {
+  const { changePassword, setPasswordData, isLoading, error } = useChangePassword();
+  const [formValue, setFormValue] = useState({
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+  const [localError, setLocalError] = useState("");
+
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValue((prev) => ({ ...prev, newPassword: e.target.value }));
+  };
+
+  const onConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValue((prev) => ({ ...prev, confirmNewPassword: e.target.value }));
+  };
+
+  const onSubmit = async () => {
+    if (formValue.newPassword !== formValue.confirmNewPassword) {
+      setLocalError("Passwords do not match");
+      return;
+    }
+
+    setLocalError("");
+    setPasswordData(formValue); 
+    await changePassword();    
+  };
+
   return (
     <div className="w-full p-6 rounded-lg outline border-[#E4E4E7] flex-col inline-flex gap-6">
       <div className="justify-start items-start gap-6">
@@ -14,16 +44,30 @@ export const Set_New_Pass = () => {
           <span className="text-sm font-medium font-['Inter'] leading-none">
             New password
           </span>
-          <Input placeholder="Enter new password" type="password" />
+          <Input
+            onChange={onPasswordChange}
+            value={formValue.newPassword}
+            placeholder="Enter new password"
+            type="password"
+          />
         </div>
         <div className="mt-[12px]">
           <span className="text-sm font-medium font-['Inter'] leading-none">
             Confirm password
           </span>
-          <Input placeholder="Confirm password" type="password" />
+          <Input
+            onChange={onConfirmPasswordChange}
+            value={formValue.confirmNewPassword}
+            placeholder="Confirm password"
+            type="password"
+          />
         </div>
+        {localError && <div className="text-red-500 text-sm mt-2">{localError}</div>}
+        {error && <div className="text-red-500 text-sm mt-2">{error}</div>}
         <div className="mt-[24px]">
-          <Button className="w-full">Save changes</Button>
+          <Button onClick={onSubmit} className="w-full" disabled={isLoading}>
+            {isLoading ? "Saving..." : "Save changes"}
+          </Button>
         </div>
       </div>
     </div>
