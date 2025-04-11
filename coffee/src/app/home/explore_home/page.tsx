@@ -4,7 +4,9 @@ import { Buttons_Explore } from "@/app/_component_/_explore_/Buttons_Explore";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 const Explore = () => {
+  const router = useRouter();
   return (
     <div className="w-full h-[4000pxx] relative">
       <HeaderH />
@@ -24,7 +26,11 @@ const Explore = () => {
           <div className="w-full h-auto self-stretch inline-flex justify-between items-center">
             <div className="inline-flex justify-start items-center gap-3">
               <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage
+                  className="cursor-pointer"
+                  src="https://github.com/shadcn.png"
+                  onClick={() => router.push("/donation-C")}
+                />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <span className="text-xl font-semibold font-['Inter'] leading-7">
