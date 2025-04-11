@@ -8,7 +8,7 @@ export const updateProfile = async (req: Request, res: Response) => {
 
   try {
     const Existingprofile = await prisma.profile.findUnique({
-      where: { id: Number(id) },
+      where: { userId: Number(id) },
     });
 
     if (!Existingprofile) {
@@ -19,14 +19,13 @@ export const updateProfile = async (req: Request, res: Response) => {
     }
 
     const updatedProfile = await prisma.profile.update({
-      where: { id: Number(id) },
+      where: { userId: Number(id) },
       data: {
         avatarImage: avatarImage,
         name: name,
         about: about,
         socialMediaURL: socialMediaURL,
         backgroundImage: backgroundImage || "",
-        userId: Number(userId),
       },
     });
 

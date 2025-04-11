@@ -6,7 +6,7 @@ export const getProfile = async (req: Request, res: Response) => {
   try {
     const profileData = await prisma.profile.findUnique({
       where: {
-        id: Number(id),
+        userId: Number(id),
       },
     });
 
