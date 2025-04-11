@@ -9,8 +9,7 @@ import CountrySelector from "@/components/selectCountery";
 import { useRouter } from "next/navigation";
 
 const Payment = () => {
-  const router = useRouter()
-
+  const router = useRouter();
 
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -98,12 +97,14 @@ const Payment = () => {
             </div>
           </div>
           <div className="w-full flex justify-end">
-          <Button className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer"
-          onClick={() => router.push("/payment")}>
-            {" "}
-            Continue{" "}
-          </Button>
-        </div>
+            <Button
+              className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer"
+              onClick={() => router.push("/payment")}
+            >
+              {" "}
+              Continue{" "}
+            </Button>
+          </div>
         </div>
       </div>
     </>
