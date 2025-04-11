@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { use, useEffect, useState } from "react";
-import { useCreateAccount } from "@/providers/CreateAccountProvider";
+import { useCreateAccount } from "@/providers/sign_up_login_provider/CreateAccountProvider";
 
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch } = useCreateAccount();

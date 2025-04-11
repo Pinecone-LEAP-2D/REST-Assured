@@ -20,3 +20,17 @@ type CreateProfile = {
   socialMediaURL?: string | null;
   userID?: number | null;
 };
+type UserProfile =
+  | {
+      id: number;
+      userId: number | string;
+      name: string;
+      about: string;
+      avatarImage: string;
+      backgroundImage: string;
+      socialMediaURL: string;
+      successMessage: string;
+      createdAt: string;
+      updatedAt: string;
+    }
+  | undefined;

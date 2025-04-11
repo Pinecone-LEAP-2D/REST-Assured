@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+/* import { Request, Response } from "express";
 import prisma from "../../prismaClient";
 
 export const postBankCard = async (req: Request, res: Response) => {
@@ -44,3 +44,4 @@ export const postBankCard = async (req: Request, res: Response) => {
     });
   }
 };
+ */

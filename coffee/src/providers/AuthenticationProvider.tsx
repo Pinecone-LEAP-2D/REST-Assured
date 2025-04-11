@@ -25,7 +25,6 @@ export const AuthenticationProvider = ({
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   const { decodedToken, isExpired } = useJwt(token as string);
-
   useEffect(() => {
     if (!token) {
       router.push("/login");
