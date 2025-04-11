@@ -17,7 +17,10 @@ export const Buttons = () => {
       <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer pointer-events-none">
         View page <ExternalLink />{" "}
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer">
+      <Button
+        className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer"
+        onClick={() => router.push("/home/settings")}
+      >
         Account settings
       </Button>
     </div>

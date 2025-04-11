@@ -1,6 +1,6 @@
 "use client";
-import { HeaderH } from "@/app/_component_/HeaderH";
-import { Buttons_Explore } from "@/app/_component_/Buttons_Explore";
+import { HeaderH } from "@/app/_component_/_homeSettings_/HeaderH";
+import { Buttons_Explore } from "@/app/_component_/_explore_/Buttons_Explore";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";

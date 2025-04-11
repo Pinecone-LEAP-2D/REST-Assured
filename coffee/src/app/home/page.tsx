@@ -1,12 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { HeaderH } from "../_component_/HeaderH";
+import { HeaderH } from "../_component_/_homeSettings_/HeaderH";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Copy } from "lucide-react";
-import { Line } from "../_component_/Line";
-import { Date } from "../_component_/Date";
-import { AmountBox } from "../_component_/AmountBox";
-import { Buttons } from "../_component_/Buttons";
+import { Line } from "../_component_/_home_/Line";
+import { Date } from "../_component_/_home_/Date";
+import { AmountBox } from "../_component_/_home_/AmountBox";
+import { Buttons } from "../_component_/_home_/Buttons";
 const Home = () => {
   return (
     <div className="w-full h-[4000pxx] relative">
