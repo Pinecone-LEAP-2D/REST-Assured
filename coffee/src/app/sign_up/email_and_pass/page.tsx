@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { use, useEffect, useState } from "react";
-import { useCreateAccount } from "@/providers/sign_up_login_provider/CreateAccountProvider";
+import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
 
 export default function Email_And_Pass() {
-  const { createAccount, setCreateAccount, refetch } = useCreateAccount();
+  const { createAccount, setCreateAccount, refetch, isLoading, error } =
+    useCreateAccount();
+  console.log(error);
   const [formValue, setFormValue] = useState<CreateAccount>({
     username: createAccount.username,
   });
@@ -64,11 +66,12 @@ export default function Email_And_Pass() {
                 onChange={onPasswordChange}
               />
             </div>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <Button
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={() => refetch()}
             >
-              Continue
+              {isLoading ? (  <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div> ) : "Continue"}
             </Button>
           </div>
         </div>

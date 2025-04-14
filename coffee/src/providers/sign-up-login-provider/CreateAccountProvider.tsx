@@ -7,12 +7,15 @@ type CreateAccount = {
   email?: string | null;
   password?: string | null;
   username?: string | null;
+  
 };
 
 type CreateAccountContextType = {
   createAccount: CreateAccount;
   refetch: () => Promise<void>;
   setCreateAccount: (account: CreateAccount) => void;
+  isLoading: boolean;
+  error: string | null;
 };
 
 const CreateAccountContext = createContext<
@@ -25,6 +28,8 @@ export const CreateAccountProvider = ({
   children: React.ReactNode;
 }) => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const [createAccount, setCreateAccount] = useState<CreateAccount>({
     email: null,
     password: null,
@@ -32,6 +37,8 @@ export const CreateAccountProvider = ({
   });
 
   const fetchData = async () => {
+    setIsLoading(true)
+    setError(null)
     try {
       const response = await fetch("http://localhost:4000/users", {
         method: "POST",
@@ -50,16 +57,24 @@ export const CreateAccountProvider = ({
       if(data.success) {
         router.push("/create_profile")
         localStorage.setItem('token' , data.token)
+      }else{
+        setError( data.message)
       }
+      
+      console.log(data)
     } catch (error) {
       console.error("Error fetching data:", error);
+     
+    }finally{
+      setIsLoading(false)
+  
     }
     
   };
 
   return (
     <CreateAccountContext.Provider
-      value={{ createAccount, setCreateAccount, refetch: fetchData }}
+      value={{ createAccount, setCreateAccount, refetch: fetchData , isLoading , error }}
     >
       {children}
     </CreateAccountContext.Provider>
