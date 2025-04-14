@@ -2,7 +2,7 @@
 import { LeftTable } from "../_component_/LeftTable";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useCreateAccount } from "@/providers/sign_up_login_provider/CreateAccountProvider";
+import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function SignUp() {

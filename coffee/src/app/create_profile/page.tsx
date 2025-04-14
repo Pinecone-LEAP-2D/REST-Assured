@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Header } from "../_component_/Header";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useCreateProfile } from "@/providers/profile_provider/CreateProfileProvider";
+import { useCreateProfile } from "@/providers/profile-provider/CreateProfileProvider";
 
 const CreateProfilePage = () => {
   const { createProfile, setCreateProfile, refetch, isLoading, error } = useCreateProfile();

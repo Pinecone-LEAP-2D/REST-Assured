@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useChangePassword } from "@/providers/sign_up_login_provider/changePassowordProvider";
+import { useChangePassword } from "@/providers/sign-up-login-provider/changePassowordProvider";
 import { useState } from "react";
 
 export const Set_New_Pass = () => {
