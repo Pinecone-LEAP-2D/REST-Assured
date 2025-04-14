@@ -36,7 +36,7 @@ export default function LogIn() {
 
       const data = await response.json();
       setError(data.message)
-console.log(data)
+
       if(data.success){
         router.push('/home')
         localStorage.setItem('token' , data.token)

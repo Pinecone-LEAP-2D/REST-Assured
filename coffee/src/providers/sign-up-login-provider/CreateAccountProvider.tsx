@@ -61,7 +61,6 @@ export const CreateAccountProvider = ({
         setError(data.message);
       }
 
-      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
