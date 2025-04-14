@@ -87,7 +87,7 @@ console.log(data)
                 onChange={onPasswordChange}
               />
             </div>
-            {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
+            {error && <p className="text-red-500 mb-[10px] text-sm">{error}</p>}
             <Button
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={ LoginUser}

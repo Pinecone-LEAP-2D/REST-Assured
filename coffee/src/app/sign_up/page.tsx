@@ -6,12 +6,17 @@ import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccou
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 export default function SignUp() {
-  const { createAccount, setCreateAccount } = useCreateAccount();
+  const { createAccount, setCreateAccount, error } = useCreateAccount();
   const [formValue, setFormValue] = useState<string>("");
   const router = useRouter();
   useEffect(() => {
-    setCreateAccount({ username: formValue });
+    if (typeof window !== "undefined") {
+      const valueToStore = formValue.trim() === "" ? "null" : formValue;
+      localStorage.setItem("username", valueToStore);
+      setCreateAccount({ username: valueToStore });
+    }
   }, [formValue]);
+
   const onUserNameChange = (e: { target: { value: string } }) => {
     setFormValue(e.target.value);
   };
@@ -46,6 +51,7 @@ export default function SignUp() {
                   placeholder="Enter username here"
                   onChange={onUserNameChange}
                 />
+                {error && <p className="text-red-500 mb-2">{error}</p>}
               </div>
               <div className="mt-[24px]">
                 <Button

@@ -7,7 +7,6 @@ type CreateAccount = {
   email?: string | null;
   password?: string | null;
   username?: string | null;
-  
 };
 
 type CreateAccountContextType = {
@@ -27,7 +26,7 @@ export const CreateAccountProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [createAccount, setCreateAccount] = useState<CreateAccount>({
@@ -37,8 +36,8 @@ export const CreateAccountProvider = ({
   });
 
   const fetchData = async () => {
-    setIsLoading(true)
-    setError(null)
+    setIsLoading(true);
+    setError(null);
     try {
       const response = await fetch("http://localhost:4000/users", {
         method: "POST",
@@ -53,28 +52,32 @@ export const CreateAccountProvider = ({
       });
 
       const data = await response.json();
-    
-      if(data.success) {
-        router.push("/create_profile")
-        localStorage.setItem('token' , data.token)
-      }else{
-        setError( data.message)
+
+      if (data.success) {
+        router.push("/create_profile");
+        localStorage.setItem("token", data.token);
+        localStorage.removeItem("username");
+      } else {
+        setError(data.message);
       }
-      
-      console.log(data)
+
+      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
-     
-    }finally{
-      setIsLoading(false)
-  
+    } finally {
+      setIsLoading(false);
     }
-    
   };
 
   return (
     <CreateAccountContext.Provider
-      value={{ createAccount, setCreateAccount, refetch: fetchData , isLoading , error }}
+      value={{
+        createAccount,
+        setCreateAccount,
+        refetch: fetchData,
+        isLoading,
+        error,
+      }}
     >
       {children}
     </CreateAccountContext.Provider>
@@ -84,7 +87,9 @@ export const CreateAccountProvider = ({
 export const useCreateAccount = () => {
   const context = useContext(CreateAccountContext);
   if (!context) {
-    throw new Error("useCreateProfile must be used within a CreateProfileProvider");
+    throw new Error(
+      "useCreateProfile must be used within a CreateProfileProvider"
+    );
   }
   return context;
 };
