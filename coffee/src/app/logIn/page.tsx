@@ -17,6 +17,7 @@ export default function LogIn() {
     password: null,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error , setError] = useState<string>()
 
   const LoginUser = async () => {
     setIsLoading(true);
@@ -34,7 +35,8 @@ export default function LogIn() {
       });
 
       const data = await response.json();
-
+      setError(data.message)
+console.log(data)
       if(data.success){
         router.push('/home')
         localStorage.setItem('token' , data.token)
@@ -85,6 +87,7 @@ export default function LogIn() {
                 onChange={onPasswordChange}
               />
             </div>
+            {error && <p className="text-red-500 mb-3 text-sm">{error}</p>}
             <Button
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={ LoginUser}
