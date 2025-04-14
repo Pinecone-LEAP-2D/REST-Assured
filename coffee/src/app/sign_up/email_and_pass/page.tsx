@@ -71,7 +71,7 @@ export default function Email_And_Pass() {
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={() => refetch()}
             >
-              {isLoading ? "Sending..." : "Continue"}
+              {isLoading ? (  <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div> ) : "Continue"}
             </Button>
           </div>
         </div>
