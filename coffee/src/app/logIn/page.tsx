@@ -17,10 +17,19 @@ export default function LogIn() {
     password: null,
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error , setError] = useState<string>()
+  const [error, setError] = useState<string>();
 
   const LoginUser = async () => {
     setIsLoading(true);
+    setError(undefined);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formValue.email || !emailRegex.test(formValue.email)) {
+      setError("Please enter a valid email address.");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:4000/users/login", {
@@ -29,17 +38,17 @@ export default function LogIn() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email:formValue.email,
-          password:formValue.password
+          email: formValue.email,
+          password: formValue.password,
         }),
       });
 
       const data = await response.json();
-      setError(data.message)
+      setError(data.message);
 
-      if(data.success){
-        router.push('/home')
-        localStorage.setItem('token' , data.token)
+      if (data.success) {
+        router.push("/home");
+        localStorage.setItem("token", data.token);
       }
     } catch (error) {
       console.log(error);
@@ -90,7 +99,7 @@ export default function LogIn() {
             {error && <p className="text-red-500 mb-[10px] text-sm">{error}</p>}
             <Button
               className="w-full bg-[black] text-white py-2 rounded"
-              onClick={ LoginUser}
+              onClick={LoginUser}
             >
               Continue
             </Button>
