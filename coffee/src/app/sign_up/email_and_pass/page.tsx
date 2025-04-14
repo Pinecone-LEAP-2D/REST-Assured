@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
 
+
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch, isLoading, error } =
     useCreateAccount();
@@ -27,27 +28,14 @@ export default function Email_And_Pass() {
   const router = useRouter();
 
   useEffect(() => {
-    const check = async () => {
-      const username = localStorage.getItem("username");
-
-      if (!username || username === "null" || username.trim() === "") {
-        localStorage.clear();
-        router.replace("/sign_up");
-      }
-    };
-
-    check();
-  }, []);
-
-  useEffect(() => {
     setCreateAccount(formValue);
   }, [formValue]);
 
   useEffect(() => {
-    if (createAccount.username === null) {
+    if (formValue.username === null) {
       router.push("/sign_up");
     }
-  }, []);
+  });
 
   const onEmailChange = (e: { target: { value: string } }) => {
     setFormValue((prev) => ({ ...prev, email: e.target.value }));
@@ -135,16 +123,12 @@ export default function Email_And_Pass() {
                 <p className="text-red-500">{formErrors.password}</p>
               )}
             </div>
-            {error && <p className="text-red-500 mb-2">{error}</p>}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <Button
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={handleSubmit}
             >
-              {isLoading ? (
-                <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div>
-              ) : (
-                "Continue"
-              )}
+              {isLoading ? (  <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div> ) : "Continue"}
             </Button>
           </div>
         </div>

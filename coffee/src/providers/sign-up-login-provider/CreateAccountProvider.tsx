@@ -52,15 +52,15 @@ export const CreateAccountProvider = ({
       });
 
       const data = await response.json();
-
+      console.log(data);
       if (data.success) {
-        router.push("/create_profile");
         localStorage.setItem("token", data.token);
         localStorage.removeItem("username");
+
+           router.push(`/create_profile/${data.newUser.id}`); 
       } else {
         setError(data.message);
       }
-
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {

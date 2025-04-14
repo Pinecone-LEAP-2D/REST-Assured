@@ -44,7 +44,7 @@ export const UpdateProfileProvider = ({
     socialMediaURL: null,
     userID: null,
   });
-  console.log(updateProfile)
+
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export const UpdateProfileProvider = ({
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:4000/profile/${decodedToken?.id}`,
+        `http://localhost:4000/profile/${decodedToken?.userData?.id}`,
         {
           method: "PUT",
           headers: {
@@ -71,7 +71,7 @@ export const UpdateProfileProvider = ({
         }
       );
   
-      console.log(response);
+  
     } catch (error) {
      console.log(error)
     } finally {

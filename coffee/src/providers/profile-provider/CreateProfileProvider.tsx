@@ -27,7 +27,9 @@ export const CreateProfileProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const decodedToken = useUserData();
+  const  decodedToken   = useUserData();
+  console.log(decodedToken)
+  console.log("decodedToken" ,decodedToken)
 const router = useRouter()
   const [createProfile, setCreateProfile] = useState<CreateProfile>({
     image: null,
@@ -36,14 +38,14 @@ const router = useRouter()
     socialMediaURL: null,
     userID: null,
   });
-
+console.log(createProfile)
 
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-   
+
     setIsLoading(true);
     setError(null);
     try {
@@ -58,10 +60,11 @@ const router = useRouter()
           name: createProfile.name,
           about: createProfile.about,
           socialMediaURL: createProfile.socialMediaURL,
-          userId: decodedToken?.id,
+          userId: createProfile?.userID,
         }),
       });
       const data = await response.json();
+      console.log(data)
       if(data.success){
         router.push('/payment')
       }

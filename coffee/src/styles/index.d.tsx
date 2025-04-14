@@ -22,7 +22,7 @@ type CreateProfile = {
 };
 type UserProfile =
   | {
-      id: number;
+      id: string;
       userId: number | string;
       name: string;
       about: string;

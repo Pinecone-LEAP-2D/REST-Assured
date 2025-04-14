@@ -3,12 +3,18 @@ import { AvatarImg } from "@/components/AvatarImg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Header } from "../_component_/Header";
-import { useRouter } from "next/navigation";
+
+import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useCreateProfile } from "@/providers/profile-provider/CreateProfileProvider";
+import { Header } from "@/app/_component_/Header";
 
 const CreateProfilePage = () => {
+  const { id } = useParams<{ id: string }>();
+
+  const userID = Number(id); // safely convert to number
+  
+
   const { createProfile, setCreateProfile, refetch, isLoading, error } = useCreateProfile();
   const router = useRouter();
 
@@ -17,7 +23,7 @@ const CreateProfilePage = () => {
     name: createProfile.name,
     about: createProfile.about,
     socialMediaURL: createProfile.socialMediaURL,
-    userID: createProfile.userID,
+    userID: userID,
   });
 
   const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +42,7 @@ const CreateProfilePage = () => {
     setFormValue((prev) => ({ ...prev, image: url }));
   };
 
-  // Sync form state with context
+
   useEffect(() => {
     setCreateProfile(formValue);
   }, [formValue, setCreateProfile]);

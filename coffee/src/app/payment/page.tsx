@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 import { CardInput } from "@/components/ui/bankcard";
 
-import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
+import { usePayment } from "@/providers/profile-provider/payment-provider/createPaymentProvider";
 import { CountrySelector } from "@/components/selectCountery";
 import { SelectMonth } from "@/components/selecetMonth";
 

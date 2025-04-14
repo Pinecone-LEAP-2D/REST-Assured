@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-import { useUserData } from "../AuthenticationProvider";
+import { useUserData } from "../../AuthenticationProvider";
 
 type PaymentContextType = {
   payment: Payment;
@@ -55,7 +55,7 @@ export const PaymentProvider = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: decodedToken?.id,
+          userId: decodedToken?.decodedToken.id,
           country: payment.country,
           firstName: payment.firstName,
           lastName: payment.lastName,
@@ -67,7 +67,7 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-      console.log(data);
+    
 
       if (data.success) {
       } else {
