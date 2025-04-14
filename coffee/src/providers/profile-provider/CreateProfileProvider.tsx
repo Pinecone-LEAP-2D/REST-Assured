@@ -63,7 +63,7 @@ const router = useRouter()
       });
       const data = await response.json();
       if(data.success){
-        router.push('/home')
+        router.push('/payment')
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");

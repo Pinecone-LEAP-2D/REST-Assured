@@ -6,25 +6,44 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const SelectMonth = () => {
+type Props = {
+  onChange?: (value: string, label: string) => void;
+};
+
+const monthMap: Record<string, string> = {
+  "01": "January",
+  "02": "February",
+  "03": "March",
+  "04": "April",
+  "05": "May",
+  "06": "June",
+  "07": "July",
+  "08": "August",
+  "09": "September",
+  "10": "October",
+  "11": "November",
+  "12": "December",
+};
+
+export const SelectMonth = ({ onChange }: Props) => {
+  const handleChange = (value: string) => {
+    const label = monthMap[value]; 
+    if (onChange) {
+      onChange(value, label); 
+    }
+  };
+
   return (
-    <Select>
+    <Select onValueChange={handleChange}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select Month" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="January">January</SelectItem>
-        <SelectItem value="February">February</SelectItem>
-        <SelectItem value="March">March</SelectItem>
-        <SelectItem value="April">April</SelectItem>
-        <SelectItem value="May">May</SelectItem>
-        <SelectItem value="June">June</SelectItem>
-        <SelectItem value="July">July</SelectItem>
-        <SelectItem value="August">August</SelectItem>
-        <SelectItem value="September">September</SelectItem>
-        <SelectItem value="October">October</SelectItem>
-        <SelectItem value="November">November</SelectItem>
-        <SelectItem value="December">December</SelectItem>
+        {Object.entries(monthMap).map(([value, label]) => (
+          <SelectItem key={value} value={value}>
+            {label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
