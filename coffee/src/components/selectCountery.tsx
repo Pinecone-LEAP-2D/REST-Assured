@@ -19,59 +19,46 @@ import {
 } from "@/components/ui/popover";
 import countryList from "react-select-country-list";
 import { SingleValue } from "react-select";
-
-const CountrySelector: React.FC = () => {
-  const [value, setValue] = useState<SingleValue<any>>(null);
-  const options = useMemo(() => countryList().getData(), []);
-
-  const [open, setOpen] = React.useState(false);
-
-  return (
-    <>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            role="combobox"
-            aria-expanded={open}
-            className="w-full justify-between"
-          >
-            {value ? value.label : "Select country..."}
-            <ChevronsUpDown className="opacity-50" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-full p-0">
-          <Command>
-            <CommandInput placeholder="Search country..." className="h-9" />
-            <CommandList>
-              <CommandEmpty>No country found.</CommandEmpty>
-              <CommandGroup>
-                {options.map((country) => (
-                  <CommandItem
-                    key={country.value}
-                    onSelect={() => {
-                      setValue(country);
-                      setOpen(false);
-                    }}
-                  >
-                    {country.label}
-                    <Check
-                      className={cn(
-                        "ml-auto",
-                        value?.value === country.value
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-    </>
-  );
+type Props = {
+  onChange?: (e: string) => void;
 };
 
-export default CountrySelector;
+export const CountrySelector: React.FC<Props> = ({ onChange }) => {
+  const [value, setValue] = useState<SingleValue<any>>(null);
+  const options = useMemo(() => countryList().getData(), []);
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
+          {value ? value.label : "Select country..."}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full p-0">
+        <Command>
+          <CommandInput placeholder="Search country..." className="h-9" />
+          <CommandList>
+            <CommandEmpty>No country found.</CommandEmpty>
+            <CommandGroup>
+              {options.map((country) => (
+                <CommandItem
+                  key={country.value}
+                  onSelect={() => {
+                    setValue(country);
+                    setOpen(false);
+                    if (onChange) onChange(country.label);
+                  }}
+                >
+                  {country.label}
+                  <Check className={cn("ml-auto", value?.value === country.value ? "opacity-100" : "opacity-0")} />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+};
