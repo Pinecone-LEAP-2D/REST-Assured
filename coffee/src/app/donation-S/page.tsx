@@ -1,24 +1,18 @@
-"use client";
-import { Button } from "@/components/ui/button";
 import { HeaderH } from "../_component_/_homeSettings_/HeaderH";
-import { CameraIcon } from "lucide-react";
 import { Profile_C } from "../_component_/donation_C_Left/Profile";
-import { Social_URL_C } from "../_component_/donation_C_Left/Social_Url";
 import { Recent_S_C } from "../_component_/donation_C_Left/Recent_Supporters";
-import { Buy_Coffee_C } from "../_component_/donation_C_Right/Buy_Coffee";
+import { Social_URL_C } from "../_component_/donation_C_Left/Social_Url";
 import { Amount_C } from "../_component_/donation_C_Right/Amount";
-import { Social_Url_D } from "../_component_/donation_C_Right/Social_Url";
+import { Buy_Coffee_C } from "../_component_/donation_C_Right/Buy_Coffee";
 import { Message_D } from "../_component_/donation_C_Right/Message_D";
+import { Social_Url_D } from "../_component_/donation_C_Right/Social_Url";
 import { Support_D } from "../_component_/donation_C_Right/Support_Button";
-const Donation_C = () => {
+
+//this page is used for visiting other peoples profile
+const Supporter = () => {
   return (
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />
-      <div className="w-full h-[319px] relative bg-[#F4F4F5] overflow-hidden inline-flex justify-center items-center gap-2">
-        <Button className="w-[181px] bg-black text-white">
-          <CameraIcon /> Add a cover image
-        </Button>
-      </div>
       <div className="w-[632px] h-auto justify-start items-start gap-5 absolute top-[289px] left-[80px]">
         <Profile_C />
         <Social_URL_C />
@@ -38,4 +32,3 @@ const Donation_C = () => {
     </div>
   );
 };
-export default Donation_C;
