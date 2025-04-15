@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useCreateProfile } from "@/providers/profile-provider/CreateProfileProvider";
 import { Header } from "@/app/_component_/Header";
@@ -16,7 +16,6 @@ const CreateProfilePage = () => {
   
 
   const { createProfile, setCreateProfile, refetch, isLoading, error } = useCreateProfile();
-  const router = useRouter();
 
   const [formValue, setFormValue] = useState({
     image: createProfile.image,

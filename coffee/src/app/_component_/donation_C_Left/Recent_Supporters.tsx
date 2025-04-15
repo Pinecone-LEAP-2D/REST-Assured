@@ -1,5 +1,10 @@
 import { HeartIcon } from "lucide-react";
+import {
+  GetProfileDataProvider,
+  useGetProfileData,
+} from "@/providers/profile-provider/getProfileDataProvider";
 export const Recent_S_C = () => {
+  const { getProfileData } = useGetProfileData();
   return (
     <div className="w-full h-auto p-6 rounded-lg outline border-[#E4E4E7] bg-white inline-flex flex-col justify-start items-start gap-2 mt-[20px]">
       <div className="w-[584px] justify-start items-start flex-col">
@@ -13,7 +18,7 @@ export const Recent_S_C = () => {
           </div>
           <div>
             <span className="text-base font-semibold font-['Inter'] leading-normal">
-              Be the first one to support *Name here*
+              Be the first one to support {getProfileData?.name}
             </span>
           </div>
         </div>

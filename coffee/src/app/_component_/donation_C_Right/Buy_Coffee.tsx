@@ -1,8 +1,12 @@
+"use client";
+import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
+
 export const Buy_Coffee_C = () => {
+  const { getProfileData } = useGetProfileData();
   return (
     <div>
       <span className="text-2xl font-semibold font-['Inter'] leading-loose">
-        Buy *Name here* a Coffee
+        Buy {getProfileData?.name} a Coffee
       </span>
     </div>
   );

@@ -8,13 +8,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 export const HeaderH = () => {
   const router = useRouter();
-  const { getProfileData, getRefetch, isLoading, error } = useGetProfileData();
+  const { getProfileData } = useGetProfileData();
   return (
     <div className="w-full h-[56px] flex justify-between items-center p-8 sticky">
       <div className="flex justify-start gap-2">
@@ -25,7 +23,7 @@ export const HeaderH = () => {
       </div>
       <div className="flex justify-start items-center gap-3">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={getProfileData?.avatarImage} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <span className="text-sm font-medium font-['Inter'] leading-tight">

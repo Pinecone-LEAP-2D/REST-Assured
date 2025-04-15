@@ -10,7 +10,7 @@ export const Profile_C = () => {
     <div className="w-full h-auto p-6 rounded-lg outline border-[#E4E4E7] bg-white inline-flex flex-col justify-start items-start gap-2">
       <div className="flex">
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={getProfileData?.avatarImage} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <span className="w-[auto] text-xl font-bold font-['Inter'] leading-normal ml-[12px]">
