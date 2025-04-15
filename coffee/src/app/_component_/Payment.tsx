@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
 import { CountrySelector } from "@/components/selectCountery";
-import { usePayment } from "@/providers/profile-provider/payment-provider/createPaymentProvider";
+
 import { useState } from "react";
 import { CardInput } from "@/components/ui/bankcard";
+import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
 export const Payment_V1 = () => {
    const { setPayment, UpdateBankCard, isLoading } = usePayment();
   const router = useRouter();

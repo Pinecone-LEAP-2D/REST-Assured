@@ -47,7 +47,17 @@ export const AuthenticationProvider = ({
   };
   useEffect(() => {
     user();
+    const userContextData: UserContextType =
+    decodedToken as UserContextType;
+
+  setUserData(userContextData);
   }, [token, decodedToken, isExpired, router]);
+  useEffect(()=> {
+    const userContextData: UserContextType =
+    decodedToken as UserContextType;
+
+  setUserData(userContextData);
+  },[])
 
   if (isLoading) {
     return <Loading></Loading>;

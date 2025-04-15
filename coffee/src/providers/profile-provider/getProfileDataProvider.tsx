@@ -32,7 +32,7 @@ export const GetProfileDataProvider = ({
   const decodedToken = useUserData();
 
   const [getProfileData, setGetProfileData] = useState<UserProfile>();
-console.log(getProfileData)
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,11 +41,11 @@ console.log(getProfileData)
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:4000/profile/${decodedToken?.userData?.id}`
+        `http://localhost:4000/profile/${decodedToken?.id}`
       );
 
       const data = response.data.profileData      ;
-      console.log(data)
+
       setGetProfileData(data);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");

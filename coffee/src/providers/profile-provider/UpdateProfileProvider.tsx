@@ -54,7 +54,7 @@ export const UpdateProfileProvider = ({
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:4000/profile/${decodedToken?.userData?.id}`,
+        `http://localhost:4000/profile/${decodedToken?.id}`,
         {
           method: "PUT",
           headers: {

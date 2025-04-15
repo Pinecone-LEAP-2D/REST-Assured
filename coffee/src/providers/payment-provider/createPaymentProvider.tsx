@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-import { useUserData } from "../../AuthenticationProvider";
+import { useUserData } from "../AuthenticationProvider";
 
 type PaymentContextType = {
   payment: Payment;
@@ -23,7 +23,7 @@ export const PaymentProvider = ({
   const router = useRouter();
   const decodedToken = useUserData();
   const [payment, setPayment] = useState<Payment>({
-    id: null,
+    id: decodedToken?.id as number,
     country: null,
     firstName: null,
     lastName: null,
@@ -55,7 +55,7 @@ export const PaymentProvider = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: decodedToken?.decodedToken.id,
+          userId: decodedToken?.id,
           country: payment.country,
           firstName: payment.firstName,
           lastName: payment.lastName,
@@ -67,9 +67,9 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-    
-
+console.log(data)
       if (data.success) {
+        router.push('/home')
       } else {
         setError(data.message || "Payment failed.");
       }
@@ -103,9 +103,9 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-
+      console.log(data);
       if (data.success) {
-        router.push("/home")
+        router.push("/home");
       } else {
         setError(data.message || "Payment failed.");
       }
