@@ -39,7 +39,7 @@ const router = useRouter()
   });
 
 
-
+console.log(createProfile)
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 

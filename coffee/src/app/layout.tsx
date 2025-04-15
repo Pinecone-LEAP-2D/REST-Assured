@@ -6,6 +6,7 @@ import { UpdateProfileProvider } from "@/providers/profile-provider/UpdateProfil
 import { GetProfileDataProvider } from "@/providers/profile-provider/getProfileDataProvider";
 import { ChangePasswordProvider } from "@/providers/sign-up-login-provider/changePassowordProvider";
 import { PaymentProvider } from "@/providers/payment-provider/createPaymentProvider";
+import { GetExploreProvider } from "@/providers/getEcploreProvider";
 
 
 export default function RootLayout({
@@ -22,7 +23,9 @@ export default function RootLayout({
               <ChangePasswordProvider>
                 <GetProfileDataProvider>
                   <PaymentProvider>
+                    <GetExploreProvider>
                     <CreateAccountProvider>{children}</CreateAccountProvider>
+                    </GetExploreProvider>
                   </PaymentProvider>
                 </GetProfileDataProvider>
               </ChangePasswordProvider>
