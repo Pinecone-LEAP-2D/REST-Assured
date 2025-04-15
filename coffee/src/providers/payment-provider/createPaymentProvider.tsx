@@ -23,7 +23,7 @@ export const PaymentProvider = ({
   const router = useRouter();
   const decodedToken = useUserData();
   const [payment, setPayment] = useState<Payment>({
-    id: null,
+    id: decodedToken?.id as number,
     country: null,
     firstName: null,
     lastName: null,
@@ -67,9 +67,9 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-      console.log(data);
-
+console.log(data)
       if (data.success) {
+        router.push('/home')
       } else {
         setError(data.message || "Payment failed.");
       }
@@ -103,9 +103,9 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-
+      console.log(data);
       if (data.success) {
-        router.push("/home")
+        router.push("/home");
       } else {
         setError(data.message || "Payment failed.");
       }

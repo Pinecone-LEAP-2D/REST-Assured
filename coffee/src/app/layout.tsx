@@ -7,6 +7,7 @@ import { GetProfileDataProvider } from "@/providers/profile-provider/getProfileD
 import { ChangePasswordProvider } from "@/providers/sign-up-login-provider/changePassowordProvider";
 import { PaymentProvider } from "@/providers/payment-provider/createPaymentProvider";
 
+
 export default function RootLayout({
   children,
 }: Readonly<{

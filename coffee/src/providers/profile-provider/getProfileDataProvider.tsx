@@ -45,6 +45,7 @@ export const GetProfileDataProvider = ({
       );
 
       const data = response.data.profileData      ;
+
       setGetProfileData(data);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");

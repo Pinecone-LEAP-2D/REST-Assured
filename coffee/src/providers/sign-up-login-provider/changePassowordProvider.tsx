@@ -57,7 +57,7 @@ export const ChangePasswordProvider = ({ children }: { children: React.ReactNode
         throw new Error(errorData.message || "Failed to change password");
       }
 
-      console.log("Password changed successfully");
+   
     } catch (err: any) {
       setError(err.message);
       console.error("Error changing password:", err);

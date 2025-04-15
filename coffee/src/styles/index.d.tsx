@@ -22,7 +22,7 @@ type CreateProfile = {
 };
 type UserProfile =
   | {
-      id: number;
+      id: string;
       userId: number | string;
       name: string;
       about: string;
@@ -35,7 +35,7 @@ type UserProfile =
     }
   | undefined;
 type Payment = {
-  id: string | null;
+  id: number | null;
   country: string | null;
   firstName: string | null;
   lastName: string | null;

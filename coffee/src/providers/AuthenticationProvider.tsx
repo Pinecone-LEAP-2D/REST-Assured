@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useJwt } from "react-jwt";
 import React from "react";
+import { Loading } from "@/components/loading";
 
 type UserContextType = {
   email: string;
@@ -11,6 +12,7 @@ type UserContextType = {
   username: string;
   exp: number;
   iat: number;
+  
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -25,21 +27,45 @@ export const AuthenticationProvider = ({
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   const { decodedToken, isExpired } = useJwt(token as string);
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-      return;
-    } else {
-      const userContextData: UserContextType = decodedToken as UserContextType;
+  const user = () => {
+    setIsLoading(true);
+    try {
+      if (!token) {
+        router.push("/login");
+        return;
+      } else {
+        const userContextData: UserContextType =
+          decodedToken as UserContextType;
 
-      setUserData(userContextData);
+        setUserData(userContextData);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
+  };
+  useEffect(() => {
+    user();
+    const userContextData: UserContextType =
+    decodedToken as UserContextType;
 
-    setIsLoading(false);
+  setUserData(userContextData);
   }, [token, decodedToken, isExpired, router]);
+  useEffect(()=> {
+    const userContextData: UserContextType =
+    decodedToken as UserContextType;
 
+  setUserData(userContextData);
+  },[])
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
-    <UserContext.Provider value={userData}>{children}</UserContext.Provider>
+    <UserContext.Provider value={userData}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

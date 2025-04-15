@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 
 import { CardInput } from "@/components/ui/bankcard";
 
-import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
 import { CountrySelector } from "@/components/selectCountery";
 import { SelectMonth } from "@/components/selecetMonth";
+import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
 
 const Payment = () => {
   const router = useRouter();

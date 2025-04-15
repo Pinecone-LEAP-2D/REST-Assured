@@ -19,7 +19,7 @@ type CreateProfileContextType = {
 };
 
 const CreateProfileContext = createContext<
-  CreateProfileContextType | undefined
+  CreateProfileContextType | undefined  
 >(undefined);
 
 export const CreateProfileProvider = ({
@@ -27,7 +27,8 @@ export const CreateProfileProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const decodedToken = useUserData();
+  const  decodedToken   = useUserData();
+
 const router = useRouter()
   const [createProfile, setCreateProfile] = useState<CreateProfile>({
     image: null,
@@ -43,7 +44,7 @@ const router = useRouter()
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-   
+
     setIsLoading(true);
     setError(null);
     try {
@@ -58,10 +59,11 @@ const router = useRouter()
           name: createProfile.name,
           about: createProfile.about,
           socialMediaURL: createProfile.socialMediaURL,
-          userId: decodedToken?.id,
+          userId: createProfile?.userID,
         }),
       });
       const data = await response.json();
+
       if(data.success){
         router.push('/payment')
       }

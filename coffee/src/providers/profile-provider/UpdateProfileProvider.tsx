@@ -44,7 +44,7 @@ export const UpdateProfileProvider = ({
     socialMediaURL: null,
     userID: null,
   });
-  console.log(updateProfile)
+
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -71,7 +71,7 @@ export const UpdateProfileProvider = ({
         }
       );
   
-      console.log(response);
+  
     } catch (error) {
      console.log(error)
     } finally {
