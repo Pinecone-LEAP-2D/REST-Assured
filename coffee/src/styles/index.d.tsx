@@ -44,3 +44,4 @@ type Payment = {
   year: string | null;
   cvc: string | null;
 };
+// types.ts
