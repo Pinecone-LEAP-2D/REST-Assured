@@ -12,56 +12,34 @@ type UserContextType = {
   username: string;
   exp: number;
   iat: number;
-  
 };
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const AuthenticationProvider = ({
-  children,
-}: Readonly<{ children: React.ReactNode }>) => {
+export const AuthenticationProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const [userData, setUserData] = useState<UserContextType>();
   const [isLoading, setIsLoading] = useState(true);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  const { decodedToken, isExpired } = useJwt(token as string);
-  const user = () => {
-    setIsLoading(true);
-    try {
-      if (!token) {
-        router.push("/login");
-        return;
-      } else {
-        const userContextData: UserContextType =
-          decodedToken as UserContextType;
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const { decodedToken, isExpired } = useJwt(token ?? "");
 
-        setUserData(userContextData);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
+  useEffect(() => {
+    if (!token || isExpired) {
+      router.push("/login");
+      return;
+    }
+
+    if (decodedToken && typeof decodedToken === "object" && "id" in decodedToken) {
+      setUserData(decodedToken as UserContextType);
       setIsLoading(false);
     }
-  };
-  useEffect(() => {
-    user();
-    const userContextData: UserContextType =
-    decodedToken as UserContextType;
+  }, [decodedToken, token, isExpired, router]);
 
-  setUserData(userContextData);
-  }, [token, decodedToken, isExpired, router]);
-  useEffect(()=> {
-    const userContextData: UserContextType =
-    decodedToken as UserContextType;
-
-  setUserData(userContextData);
-  },[])
-
-  if (isLoading) {
-    return <Loading></Loading>;
+  if (isLoading || !userData) {
+    return <Loading />;
   }
+
   return (
     <UserContext.Provider value={userData}>
       {children}
