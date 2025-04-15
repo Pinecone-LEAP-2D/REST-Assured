@@ -5,6 +5,7 @@ import { useGetProfileData } from "@/providers/profile-provider/getProfileDataPr
 import { ChangeEvent, useEffect, useState } from "react";
 import { AvatarUpdate } from "./persenal_info_avatarIMG";
 import { useUpdateProfile } from "@/providers/profile-provider/UpdateProfileProvider";
+import { toast } from "react-toastify";
 export const Personal_Info = () => {
   const { updateProfile, setUpdateProfile, refetch, isLoading, error } =
     useUpdateProfile();
@@ -39,6 +40,7 @@ export const Personal_Info = () => {
 
   useEffect(() => {
     setProfileData(getProfileData);
+    toast.success("Good Job");
   }, [getProfileData]);
 
   useEffect(() => {

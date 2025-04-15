@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { Camera } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type AvatarUpdateProps = {
   avatarImage?: string;
@@ -13,8 +14,7 @@ const NEXT_PUBLIC_CLOUDINARY_API_KEY = "449676792634373";
 const CLOUDINARY_UPLOAD_PRESET = "H8ahs3";
 const CLOUDINARY_CLOUD_NAME = "dwauz9le4";
 const API_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
-export const AvatarUpdate = ({ avatarImage , onChange }: AvatarUpdateProps) => {
-
+export const AvatarUpdate = ({ avatarImage, onChange }: AvatarUpdateProps) => {
   const [data, setData] = useState<File | null>(null);
   const [previewImg, setPreviewImg] = useState<string>(avatarImage as string);
   const [loading, setLoading] = useState(false);
@@ -47,9 +47,11 @@ export const AvatarUpdate = ({ avatarImage , onChange }: AvatarUpdateProps) => {
       const url = response.data.secure_url;
       setPreviewImg(url);
       if (onChange) onChange(url);
+      toast.success("Succesfully added avatar img");
     } catch (error) {
       console.error("Error uploading to Cloudinary:", error);
-      alert("Failed to upload image.");
+      toast.error("failed to upload avatar image");
+      alert;
     } finally {
       setLoading(false);
     }

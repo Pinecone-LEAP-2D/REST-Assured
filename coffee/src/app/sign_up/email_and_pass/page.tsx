@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
-import { LeftTable } from "@/app/_component_/LeftTable";
-
+import { toast } from "react-toastify";
+import { LeftSide } from "@/app/_component_/LeftSide";
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch, isLoading, error } =
     useCreateAccount();
@@ -78,6 +78,7 @@ export default function Email_And_Pass() {
     if (isValid) {
       refetch();
       console.log("Form submitted successfully");
+      toast.success("Successfulyy loged in");
     }
   };
 
@@ -85,7 +86,7 @@ export default function Email_And_Pass() {
     <>
       <div className="w-screen h-screen flex">
         <div className="w-1/2 h-full">
-          <LeftTable />
+          <LeftSide />
         </div>
         <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">
           <Button

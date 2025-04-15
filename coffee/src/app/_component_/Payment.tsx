@@ -7,6 +7,7 @@ import { CountrySelector } from "@/components/selectCountery";
 import { useState } from "react";
 import { CardInput } from "@/components/ui/bankcard";
 import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
+import { toast } from "react-toastify";
 export const Payment_V1 = () => {
   const { setPayment, UpdateBankCard, isLoading } = usePayment();
 
@@ -54,6 +55,7 @@ export const Payment_V1 = () => {
   const handleClick = async () => {
     setPayment(formValue);
     await UpdateBankCard();
+    toast.success("Successfully added Payment data good job!!!");
   };
   return (
     <div>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useChangePassword } from "@/providers/sign-up-login-provider/changePassowordProvider";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const Set_New_Pass = () => {
   const { changePassword, setPasswordData, isLoading, error } =
@@ -31,6 +32,7 @@ export const Set_New_Pass = () => {
     setLocalError("");
     setPasswordData(formValue);
     await changePassword();
+    toast.success("Succesfully updated new password good job !");
   };
 
   return (

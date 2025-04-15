@@ -67,9 +67,9 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-console.log(data)
+      console.log(data);
       if (data.success) {
-        router.push('/home')
+        router.push("/home");
       } else {
         setError(data.message || "Payment failed.");
       }
@@ -105,7 +105,7 @@ console.log(data)
       const data = await response.json();
       console.log(data);
       if (data.success) {
-        router.push("/home");
+        router.push("/login");
       } else {
         setError(data.message || "Payment failed.");
       }
