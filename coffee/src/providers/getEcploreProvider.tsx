@@ -8,11 +8,10 @@ type User = {
   updatedAt: string | null;
   email: string | null;
   id: string | null;
-  username: string | null;
-  avatarUrl?: string | null;
-  socialMediaURL?: string | null;
-  about: string | null;
+  username:string | null
+profile:UserProfile
 };
+
 
 type Users = User[];
 
@@ -43,7 +42,9 @@ export const GetExploreProvider = ({
     try {
       const response = await axios.get("http://localhost:4000/users");
       const data: Users = response.data;
+
       setGetExploreData(data);
+      
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {
