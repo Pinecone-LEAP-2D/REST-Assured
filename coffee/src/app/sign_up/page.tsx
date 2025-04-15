@@ -31,20 +31,18 @@ export default function SignUp() {
             className="absolute top-8 right-8 bg-gray-100 px-4 py-1 rounded-md text-[black] cursor-pointer"
             onClick={() => router.push("/login")}
           >
-            <span className="text-sm font-medium font-['Inter'] leading-tight">
-              Log in
-            </span>
+            <span className="text-sm font-medium leading-tight">Log in</span>
           </Button>
           <div className="w-[320px]">
-            <span className="text-2xl font-semibold font-['Inter'] leading-loose">
+            <span className="text-2xl font-semibold leading-loose">
               Create Your Account
             </span>
             <div className="mb-3">
-              <span className="text-sm font-normal font-['Inter'] leading-tight text-[#71717A]">
+              <span className="text-sm font-normal leading-tight text-[#71717A]">
                 Choose a username for your page
               </span>
               <div className="mt-[20px]">
-                <span className="text-sm font-medium font-['Inter'] leading-none">
+                <span className="text-sm font-medium leading-none">
                   Username
                 </span>
                 <Input

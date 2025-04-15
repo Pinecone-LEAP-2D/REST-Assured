@@ -87,9 +87,7 @@ const Home = () => {
 
           <div className="inline-flex flex-col justify-start items-start gap-6">
             <div className="inline-flex justify-start items-center gap-4">
-              <span className="text-xl font-semibold font-['Inter'] leading-7">
-                Earning
-              </span>
+              <span className="text-xl font-semibold  leading-7">Earning</span>
               <Date />
             </div>
             <div>
@@ -102,7 +100,7 @@ const Home = () => {
 
         <div className="w-[907px] h-auto absolute top-[281px] inline-flex flex-col justify-start items-start gap-3">
           <div className="inline-flex justify-between gap-[550px]">
-            <span className="text-base font-semibold font-['Inter']">
+            <span className="text-base font-semibold ">
               Recent transactions
             </span>
             <div>
@@ -118,10 +116,10 @@ const Home = () => {
                 </Avatar>
                 <div className="w-full flex justify-between">
                   <div className="flex flex-col">
-                    <span className="text-sm font-medium font-['Inter'] leading-tight"> 
+                    <span className="text-sm font-medium font-['Inter'] leading-tight">
                       *name here*
                     </span>
-                    <span className="text-xs font-normal font-['Inter'] leading-none">
+                    <span className="text-xs font-normal  leading-none">
                       *social link here*
                     </span>
                   </div>
@@ -129,7 +127,7 @@ const Home = () => {
                     <span className="text-base font-bold font-['Inter'] leading-tight">
                       + *amount of money donated here*
                     </span>
-                    <span className="text-[#71717A] text-xs font-normal font-['Inter'] leading-none">
+                    <span className="text-[#71717A] text-xs font-normal  leading-none">
                       *what time ago here*
                     </span>
                   </div>

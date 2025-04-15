@@ -1,12 +1,11 @@
 "use client";
 
-import { LeftSide } from "@/app/_component_/LeftSide";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
-
+import { LeftTable } from "@/app/_component_/LeftTable";
 
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch, isLoading, error } =
@@ -86,7 +85,7 @@ export default function Email_And_Pass() {
     <>
       <div className="w-screen h-screen flex">
         <div className="w-1/2 h-full">
-          <LeftSide />
+          <LeftTable />
         </div>
         <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">
           <Button
@@ -128,7 +127,11 @@ export default function Email_And_Pass() {
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={handleSubmit}
             >
-              {isLoading ? (  <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div> ) : "Continue"}
+              {isLoading ? (
+                <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div>
+              ) : (
+                "Continue"
+              )}
             </Button>
           </div>
         </div>

@@ -14,9 +14,9 @@ const Explore = () => {
   const { getProfileData } = useGetProfileData();
   const user = useUserData();
   const router = useRouter();
-  
+
   // Define searchTerm state here
-  const [searchTerm, setSearchTerm] = useState(""); 
+  const [searchTerm, setSearchTerm] = useState("");
 
   const onChange = (e: { target: { value: string } }) => {
     setSearchTerm(e.target.value);
@@ -30,7 +30,7 @@ const Explore = () => {
       </div>
       <div className="w-[909px] h-auto inline-flex flex-col justify-start items-start gap-6 absolute left-[403px] top-[100px]">
         <div className="w-full h-auto inline-flex flex-col justify-start items-start gap-6">
-          <span className="text-xl font-semibold font-['Inter'] leading-7">
+          <span className="text-xl font-semibold leading-7">
             Explore creators
           </span>
           <div>

@@ -14,7 +14,7 @@ const Settings = () => {
       </div>
       <div className="w-[650px] h-auto inline-flex flex-col justify-start items-start gap-8 absolute left-[405px] top-[100px]">
         <div className="flex flex-col justify-start items-start gap-8">
-          <span className="text-2xl font-semibold font-['Inter'] leading-loose">
+          <span className="text-2xl font-semibold leading-loose">
             My account
           </span>
         </div>
