@@ -61,7 +61,7 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
                   {user.name?.slice(0, 2).toUpperCase() || "CN"}
                 </AvatarFallback>
               </Avatar>
-              <span className="text-xl font-semibold font-['Inter'] leading-7">
+              <span className="text-xl font-semibold leading-7">
                 {user.name}
               </span>
             </div>
@@ -69,7 +69,7 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
               className="bg-[#F4F4F5] flex items-center gap-1"
               onClick={() => router.push(`/donation-C/${user.id ?? user.userId}`)}
             >
-              <span className="text-sm text-black font-medium font-['Inter'] leading-tight">
+              <span className="text-sm text-black font-medium leading-tight">
                 View Profile
               </span>
               <img src="/external-link.svg" alt="external link" />
@@ -78,18 +78,18 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
 
           <div className="w-full flex justify-start items-start gap-5 flex-wrap">
             <div className="w-[420px] flex flex-col gap-2">
-              <span className="text-base font-semibold font-['Inter'] leading-normal">
+              <span className="text-base font-semibold leading-normal">
                 About
               </span>
-              <span className="text-sm font-normal font-['Inter'] leading-tight">
+              <span className="text-sm font-normal leading-tight">
                 {user.about || "*No bio provided*"}
               </span>
             </div>
             <div className="w-[420px] flex flex-col gap-3">
-              <span className="text-base font-semibold font-['Inter'] leading-normal">
+              <span className="text-base font-semibold leading-normal">
                 Social Media URL
               </span>
-              <span className="text-sm font-normal font-['Inter'] leading-tight text-blue-500 underline break-words">
+              <span className="text-sm font-normal leading-tight text-blue-500 underline break-words">
                 {user.socialMediaURL || "N/A"}
               </span>
             </div>

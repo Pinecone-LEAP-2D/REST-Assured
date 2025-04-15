@@ -66,10 +66,10 @@ const Home = () => {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className="inline-flex flex-col justify-center items-start gap-1">
-                <span className="text-black text-base font-bold font-['Inter']">
+                <span className="text-black text-base font-bold">
                   {getProfileData?.name}
                 </span>
-                <span className="text-black text-base font-normal font-['Inter']">
+                <span className="text-black text-base font-normal">
                   buymeacoffee.com/{user?.username}
                 </span>
               </div>
@@ -91,7 +91,7 @@ const Home = () => {
               <Date />
             </div>
             <div>
-              <span className="text-4xl font-bold font-['Inter']">
+              <span className="text-4xl font-bold">
                 ${totalEarned}
               </span>
             </div>
@@ -116,7 +116,7 @@ const Home = () => {
                 </Avatar>
                 <div className="w-full flex justify-between">
                   <div className="flex flex-col">
-                    <span className="text-sm font-medium font-['Inter'] leading-tight">
+                    <span className="text-sm font-medium leading-tight">
                       *name here*
                     </span>
                     <span className="text-xs font-normal  leading-none">
@@ -124,7 +124,7 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="flex-col flex">
-                    <span className="text-base font-bold font-['Inter'] leading-tight">
+                    <span className="text-base font-bold leading-tight">
                       + *amount of money donated here*
                     </span>
                     <span className="text-[#71717A] text-xs font-normal  leading-none">
