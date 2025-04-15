@@ -6,19 +6,19 @@ export const Buttons_Explore = () => {
   return (
     <div>
       <Button
-        className="w-[250px] bg-white text-black justify-start hover:bg-transparent cursor-pointer"
+        className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer"
         onClick={() => router.push("/home")}
       >
         Home
       </Button>
-      <Button className="w-[250px] bg-[#F4F4F5] text-black justify-start outline-none cursor-pointer">
+      <Button className="w-[250px] bg-black text-white justify-start outline-none cursor-pointer">
         Explore
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer">
+      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer">
         View page <ExternalLink />{" "}
       </Button>
       <Button
-        className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer"
+        className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer"
         onClick={() => router.push("/home/settings")}
       >
         Account settings

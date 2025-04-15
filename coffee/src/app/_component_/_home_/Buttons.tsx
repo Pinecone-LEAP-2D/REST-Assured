@@ -5,20 +5,20 @@ export const Buttons = () => {
   const router = useRouter();
   return (
     <div>
-      <Button className="w-[250px] bg-[#F4F4F5] text-black justify-start cursor-pointer">
+      <Button className="w-[250px] bg-black text-white justify-start e cursor-pointer">
         Home
       </Button>
       <Button
-        className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer"
+        className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointerr"
         onClick={() => router.push("/home/explore_home")}
       >
         Explore
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer pointer-events-none">
+      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointerr pointer-events-none">
         View page <ExternalLink />{" "}
       </Button>
       <Button
-        className="w-[250px] bg-white text-black justify-start hover:bg-transparent outline-none cursor-pointer"
+        className="w-[250px] bg-white text-black justify-start hover:text-white cursor-pointerr"
         onClick={() => router.push("/home/settings")}
       >
         Account settings
