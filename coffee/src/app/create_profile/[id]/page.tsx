@@ -8,14 +8,15 @@ import { useParams } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useCreateProfile } from "@/providers/profile-provider/CreateProfileProvider";
 import { Header } from "@/app/_component_/Header";
+import { toast } from "react-toastify";
 
 const CreateProfilePage = () => {
   const { id } = useParams<{ id: string }>();
 
   const userID = Number(id); // safely convert to number
-  
 
-  const { createProfile, setCreateProfile, refetch, isLoading, error } = useCreateProfile();
+  const { createProfile, setCreateProfile, refetch, isLoading, error } =
+    useCreateProfile();
 
   const [formValue, setFormValue] = useState({
     image: createProfile.image,
@@ -41,9 +42,9 @@ const CreateProfilePage = () => {
     setFormValue((prev) => ({ ...prev, image: url }));
   };
 
-
   useEffect(() => {
     setCreateProfile(formValue);
+    toast.success("GOOD JOB");
   }, [formValue, setCreateProfile]);
 
   return (
@@ -55,12 +56,21 @@ const CreateProfilePage = () => {
 
           <div className="inline-flex flex-col justify-start items-start gap-3">
             <p>Add photo</p>
-            <AvatarImg className="w-40 h-40" image={formValue.image || undefined} onChange={onImageChange} />
+            <AvatarImg
+              className="w-40 h-40"
+              image={formValue.image || undefined}
+              onChange={onImageChange}
+            />
           </div>
 
           <div className="w-full">
             <p>Name</p>
-            <Input type="text" placeholder="Enter your name here" value={formValue.name || ""} onChange={onNameChange} />
+            <Input
+              type="text"
+              placeholder="Enter your name here"
+              value={formValue.name || ""}
+              onChange={onNameChange}
+            />
 
             <p>About</p>
             <Textarea
@@ -84,7 +94,6 @@ const CreateProfilePage = () => {
               className="bg-[#D1D1D1] w-[246px] flex justify-center items-center text-black hover:bg-black hover:text-white cursor-pointer"
               onClick={async () => {
                 await refetch();
-           
               }}
               disabled={isLoading}
             >

@@ -17,16 +17,14 @@ export const HeaderH = () => {
     <div className="w-full h-[56px] flex justify-between items-center p-8 sticky">
       <div className="flex justify-start gap-2">
         <Coffee />
-        <span className="text-base font-bold font-['Inter'] leading-tight">
-          Buy Me Coffee
-        </span>
+        <span className="text-base font-bold leading-tight">Buy Me Coffee</span>
       </div>
       <div className="flex justify-start items-center gap-3">
         <Avatar>
           <AvatarImage src={getProfileData?.avatarImage} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <span className="text-sm font-medium font-['Inter'] leading-tight">
+        <span className="text-sm font-medium leading-tight">
           {getProfileData?.name}
         </span>
         <DropdownMenu>

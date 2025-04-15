@@ -13,7 +13,7 @@ export const Profile_C = () => {
           <AvatarImage src={getProfileData?.avatarImage} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <span className="w-[auto] text-xl font-bold font-['Inter'] leading-normal ml-[12px]">
+        <span className="w-[auto] text-xl font-bold leading-normal ml-[12px]">
           {getProfileData?.name}
         </span>
         <Button className="bg-[#F4F4F5] text-black ml-[381px]">
@@ -24,11 +24,11 @@ export const Profile_C = () => {
         <Line_C />
       </div>
       <div className="flex-col">
-        <span className="text-base font-semibold font-['Inter'] leading-normal">
+        <span className="text-base font-semibold leading-normal">
           About {getProfileData?.name}
         </span>
         <div>
-          <span className="text-sm font-normal font-['Inter'] leading-tight">
+          <span className="text-sm font-normal leading-tight">
             {getProfileData?.about}
           </span>
         </div>

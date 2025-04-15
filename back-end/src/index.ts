@@ -33,4 +33,4 @@ app.listen(port, () => {
 
 // 1. npx prisma migrate dev
 // 2. npx prisma migrate reset
-// npx prisma genreta  
+// npx prisma generate

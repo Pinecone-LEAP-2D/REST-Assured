@@ -1,13 +1,12 @@
 "use client";
 
-import { LeftSide } from "@/app/_component_/LeftSide";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useCreateAccount } from "@/providers/sign-up-login-provider/CreateAccountProvider";
-
-
+import { toast } from "react-toastify";
+import { LeftSide } from "@/app/_component_/LeftSide";
 export default function Email_And_Pass() {
   const { createAccount, setCreateAccount, refetch, isLoading, error } =
     useCreateAccount();
@@ -79,6 +78,7 @@ export default function Email_And_Pass() {
     if (isValid) {
       refetch();
       console.log("Form submitted successfully");
+      toast.success("Successfulyy loged in");
     }
   };
 
@@ -128,7 +128,11 @@ export default function Email_And_Pass() {
               className="w-full bg-[black] text-white py-2 rounded"
               onClick={handleSubmit}
             >
-              {isLoading ? (  <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div> ) : "Continue"}
+              {isLoading ? (
+                <div className="w-5 h-5 border-l-[2px] border-t-[2px] border-white rounded-full animate-spin"></div>
+              ) : (
+                "Continue"
+              )}
             </Button>
           </div>
         </div>
