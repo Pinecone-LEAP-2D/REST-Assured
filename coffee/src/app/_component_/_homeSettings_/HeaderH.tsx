@@ -3,7 +3,7 @@ import { Coffee } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 export const HeaderH = () => {
   const router = useRouter();
+  const { getProfileData, getRefetch, isLoading, error } = useGetProfileData();
   return (
     <div className="w-full h-[56px] flex justify-between items-center p-8 sticky">
       <div className="flex justify-start gap-2">
@@ -28,7 +29,7 @@ export const HeaderH = () => {
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <span className="text-sm font-medium font-['Inter'] leading-tight">
-          *Name here*
+          {getProfileData?.name}
         </span>
         <DropdownMenu>
           <DropdownMenuTrigger>

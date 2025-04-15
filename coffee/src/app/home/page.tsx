@@ -8,8 +8,12 @@ import { Date } from "../_component_/_home_/Date";
 import { AmountBox } from "../_component_/_home_/AmountBox";
 import { Buttons } from "../_component_/_home_/Buttons";
 import { useRouter } from "next/navigation";
+import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
+import { useUserData } from "@/providers/AuthenticationProvider";
 const Home = () => {
   const router = useRouter();
+  const { getProfileData } = useGetProfileData();
+  const user = useUserData();
   return (
     <div className="w-full h-[4000pxx] relative">
       <HeaderH />
@@ -30,10 +34,10 @@ const Home = () => {
               </Avatar>
               <div className="inline-flex flex-col justify-center items-start gap-1">
                 <span className="justify-start text-black text-base font-bold font-['Inter'] leading-normal">
-                  *Name here*
+                  {getProfileData?.name}
                 </span>
                 <span className="justify-start text-black text-base font-normal font-['Inter'] leading-tight">
-                  buymeacoffee.com/*user name here*
+                  buymeacoffee.com/{user?.username}
                 </span>
               </div>
             </div>

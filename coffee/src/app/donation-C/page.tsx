@@ -10,7 +10,9 @@ import { Amount_C } from "../_component_/donation_C_Right/Amount";
 import { Social_Url_D } from "../_component_/donation_C_Right/Social_Url";
 import { Message_D } from "../_component_/donation_C_Right/Message_D";
 import { Support_D } from "../_component_/donation_C_Right/Support_Button";
+import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
 const Donation_C = () => {
+  const { getProfileData } = useGetProfileData();
   return (
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />
