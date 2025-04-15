@@ -7,7 +7,7 @@ import { GetProfileDataProvider } from "@/providers/profile-provider/getProfileD
 import { ChangePasswordProvider } from "@/providers/sign-up-login-provider/changePassowordProvider";
 import { PaymentProvider } from "@/providers/payment-provider/createPaymentProvider";
 import { GetExploreProvider } from "@/providers/getEcploreProvider";
-
+import { DonationProvider } from "@/providers/donationProvider";
 
 export default function RootLayout({
   children,
@@ -17,21 +17,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthenticationProvider>
-          <CreateProfileProvider>
-            <UpdateProfileProvider>
-              <ChangePasswordProvider>
-                <GetProfileDataProvider>
-                  <PaymentProvider>
-                    <GetExploreProvider>
-                    <CreateAccountProvider>{children}</CreateAccountProvider>
-                    </GetExploreProvider>
-                  </PaymentProvider>
-                </GetProfileDataProvider>
-              </ChangePasswordProvider>
-            </UpdateProfileProvider>
-          </CreateProfileProvider>
-        </AuthenticationProvider>
+        <DonationProvider>
+          <AuthenticationProvider>
+            <CreateProfileProvider>
+              <UpdateProfileProvider>
+                <ChangePasswordProvider>
+                  <GetProfileDataProvider>
+                    <PaymentProvider>
+                      <GetExploreProvider>
+                        <CreateAccountProvider>
+                          {children}
+                        </CreateAccountProvider>
+                      </GetExploreProvider>
+                    </PaymentProvider>
+                  </GetProfileDataProvider>
+                </ChangePasswordProvider>
+              </UpdateProfileProvider>
+            </CreateProfileProvider>
+          </AuthenticationProvider>
+        </DonationProvider>
       </body>
     </html>
   );
