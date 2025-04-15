@@ -5,7 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
+import { useUserData } from "@/providers/AuthenticationProvider";
 const Explore = () => {
+  const { getProfileData } = useGetProfileData();
+  const user = useUserData();
   const router = useRouter();
   return (
     <div className="w-full h-[4000pxx] relative">
@@ -28,13 +32,13 @@ const Explore = () => {
               <Avatar>
                 <AvatarImage
                   className="cursor-pointer"
-                  src="https://github.com/shadcn.png"
+                  src={getProfileData?.avatarImage}
                   onClick={() => router.push("/donation-C")}
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <span className="text-xl font-semibold font-['Inter'] leading-7">
-                *Username here*
+                {user?.username}
               </span>
             </div>
             <div>
@@ -49,7 +53,7 @@ const Explore = () => {
           <div className="w-full h-auto inline-flex justify-start items-start gap-5">
             <div className="w-[420px] h-auto flex-1 inline-flex flex-col justify-start items-start gap-2">
               <span className="text-base font-semibold font-['Inter'] leading-normal">
-                About *Name*
+                About {getProfileData?.name}
               </span>
               <span className="text-sm font-normal font-['Inter'] leading-tight">
                 *Comment here*
@@ -60,7 +64,7 @@ const Explore = () => {
                 Social Media URL
               </span>
               <span className="text-sm font-normal font-['Inter'] leading-tight">
-                *Social URL here*
+                {getProfileData?.socialMediaURL}
               </span>
             </div>
           </div>

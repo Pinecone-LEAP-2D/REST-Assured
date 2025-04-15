@@ -3,16 +3,12 @@ import { Header_V1 } from "./Header_V1";
 import { Input } from "@/components/ui/input";
 import { SelectMonth } from "@/components/selecetMonth";
 import { Button } from "@/components/ui/button";
-
-import { useRouter } from "next/navigation";
 import { CountrySelector } from "@/components/selectCountery";
-
 import { useState } from "react";
 import { CardInput } from "@/components/ui/bankcard";
 import { usePayment } from "@/providers/payment-provider/createPaymentProvider";
 export const Payment_V1 = () => {
    const { setPayment, UpdateBankCard, isLoading } = usePayment();
-  const router = useRouter();
 
   const [formValue, setFormValue] = useState<Payment>({
     id: null,

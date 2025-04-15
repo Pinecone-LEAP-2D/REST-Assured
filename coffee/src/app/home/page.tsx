@@ -26,7 +26,7 @@ const Home = () => {
             <div className="flex justify-start items-center gap-3">
               <Avatar>
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src={getProfileData?.avatarImage}
                   className="cursor-pointer"
                   onClick={() => router.push("/donation-C")}
                 />

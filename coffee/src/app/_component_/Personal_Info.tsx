@@ -1,10 +1,8 @@
 "use client";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
 import { ChangeEvent, useEffect, useState } from "react";
-import { abort } from "process";
 import { AvatarUpdate } from "./persenal_info_avatarIMG";
 import { useUpdateProfile } from "@/providers/profile-provider/UpdateProfileProvider";
 export const Personal_Info = () => {

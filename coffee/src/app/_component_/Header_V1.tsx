@@ -1,8 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 export const Header_V1 = () => {
-  const router = useRouter();
   return (
     <div>
       <div className="flex justify-between items-center">
