@@ -13,9 +13,16 @@ import {
 export const HeaderH = () => {
   const router = useRouter();
   const { getProfileData } = useGetProfileData();
+  const handleClick = () => {
+    router.push("/login");
+    localStorage.removeItem("token");
+  };
   return (
     <div className="w-full h-[56px] flex justify-between items-center p-8 sticky">
-      <div className="flex justify-start gap-2">
+      <div
+        className="flex justify-start gap-2 cursor-pointer"
+        onClick={() => router.push("/home")}
+      >
         <Coffee />
         <span className="text-base font-bold leading-tight">Buy Me Coffee</span>
       </div>
@@ -32,7 +39,7 @@ export const HeaderH = () => {
             <ChevronDown />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => router.push("/login")}>
+            <DropdownMenuItem onClick={() => handleClick()}>
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

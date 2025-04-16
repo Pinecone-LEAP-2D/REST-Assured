@@ -9,16 +9,16 @@ export const Buttons = () => {
         Home
       </Button>
       <Button
-        className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointerr"
+        className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer"
         onClick={() => router.push("/home/explore_home")}
       >
         Explore
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointerr pointer-events-none">
+      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer pointer-events-none">
         View page <ExternalLink />{" "}
       </Button>
       <Button
-        className="w-[250px] bg-white text-black justify-start hover:text-white cursor-pointerr"
+        className="w-[250px] bg-white text-black justify-start hover:text-white cursor-pointer"
         onClick={() => router.push("/home/settings")}
       >
         Account settings
