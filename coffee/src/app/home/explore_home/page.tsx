@@ -2,20 +2,10 @@
 import { HeaderH } from "@/app/_component_/_homeSettings_/HeaderH";
 import { Buttons_Explore } from "@/app/_component_/_explore_/Buttons_Explore";
 import { Input } from "@/components/ui/input";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
-import { useUserData } from "@/providers/AuthenticationProvider";
 import { UserList } from "@/components/users";
 import { useState } from "react";
 
 const Explore = () => {
-  const { getProfileData } = useGetProfileData();
-  const user = useUserData();
-  const router = useRouter();
-
-  // Define searchTerm state here
   const [searchTerm, setSearchTerm] = useState("");
 
   const onChange = (e: { target: { value: string } }) => {

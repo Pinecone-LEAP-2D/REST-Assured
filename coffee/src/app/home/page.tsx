@@ -23,13 +23,11 @@ const Home = () => {
   const [recentTransactions, setRecentTransactions] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchDonations = async () => {
+    const fetchDonations = async (id: string) => {
       if (!getProfileData?.id) return;
 
       try {
-        const res = await fetch(
-          `http://localhost:4000/donation?recipientId=${getProfileData.id}`
-        );
+        const res = await fetch(`http://localhost:4000/profile/${id}`);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
         const json = await res.json();
@@ -50,7 +48,7 @@ const Home = () => {
       }
     };
 
-    fetchDonations();
+    fetchDonations("");
   }, [getProfileData]);
 
   const handleSendDonation = async () => {
