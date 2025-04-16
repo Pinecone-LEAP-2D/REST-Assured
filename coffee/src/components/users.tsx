@@ -49,20 +49,22 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
           className="w-[909px] h-auto p-6 rounded-lg outline border border-[#E4E4E7] flex-col inline-flex justify-start items-start gap-3"
         >
           <div className="w-full inline-flex justify-between items-center">
-            <div className="inline-flex items-center gap-3">
+            <div
+              className="inline-flex items-center gap-3"
+              onClick={() =>
+                router.push(`/donation-Creator/${user.id ?? user.userId}`)
+              }
+            >
               <Avatar>
                 <AvatarImage
                   className="cursor-pointer"
                   src={user.avatarImage || ""}
-                  onClick={() =>
-                    router.push(`/donation-Creator/${user.id ?? user.userId}`)
-                  }
                 />
                 <AvatarFallback>
                   {user.name?.slice(0, 2).toUpperCase() || "CN"}
                 </AvatarFallback>
               </Avatar>
-              <span className="text-xl font-semibold leading-7">
+              <span className="text-xl font-semibold leading-7 cursor-pointer">
                 {user.name}
               </span>
             </div>
@@ -72,7 +74,7 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
                 router.push(`/donation-Creator/${user.id ?? user.userId}`)
               }
             >
-              <span className="text-sm text-black font-medium leading-tight">
+              <span className="text-sm text-black font-medium leading-tight cursor-pointer">
                 View Profile
               </span>
               <img src="/external-link.svg" alt="external link" />
