@@ -15,7 +15,7 @@ export const Profile_C = ({ user }: { user: any }) => {
         <span className="w-[auto] text-xl font-bold leading-normal ml-[12px]">
           {user?.name}
         </span>
-        <Button className="bg-[#F4F4F5] text-black ml-[381px]">
+        <Button className="bg-[#F4F4F5] text-black ml-[360px]">
           Edit page
         </Button>
       </div>
