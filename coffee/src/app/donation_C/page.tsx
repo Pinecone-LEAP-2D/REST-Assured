@@ -1,16 +1,17 @@
 "use client";
+import { HeaderH } from "@/app/_component_/_homeSettings_/HeaderH";
+import { Profile_C } from "@/app/_component_/donation_C_Left/Profile";
+import { Recent_S_C } from "@/app/_component_/donation_C_Left/Recent_Supporters";
+import { Social_URL_C } from "@/app/_component_/donation_C_Left/Social_Url";
+import { Amount_C } from "@/app/_component_/donation_C_Right/Amount";
+import { Buy_Coffee_C } from "@/app/_component_/donation_C_Right/Buy_Coffee";
+import { Message_D } from "@/app/_component_/donation_C_Right/Message_D";
+import { Social_Url_D } from "@/app/_component_/donation_C_Right/Social_Url";
+import { Support_D } from "@/app/_component_/donation_C_Right/Support_Button";
 import { Button } from "@/components/ui/button";
-import { HeaderH } from "../_component_/_homeSettings_/HeaderH";
-import { CameraIcon } from "lucide-react";
-import { Profile_C } from "../_component_/donation_C_Left/Profile";
-import { Social_URL_C } from "../_component_/donation_C_Left/Social_Url";
-import { Recent_S_C } from "../_component_/donation_C_Left/Recent_Supporters";
-import { Buy_Coffee_C } from "../_component_/donation_C_Right/Buy_Coffee";
-import { Amount_C } from "../_component_/donation_C_Right/Amount";
-import { Social_Url_D } from "../_component_/donation_C_Right/Social_Url";
-import { Message_D } from "../_component_/donation_C_Right/Message_D";
-import { Support_D } from "../_component_/donation_C_Right/Support_Button";
+
 import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
+import { CameraIcon } from "lucide-react";
 const Donation_C = () => {
   const { getProfileData } = useGetProfileData();
   return (

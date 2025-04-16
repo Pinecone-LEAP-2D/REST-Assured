@@ -19,10 +19,10 @@ const Home = () => {
   const router = useRouter();
   const { getProfileData } = useGetProfileData();
   const user = useUserData();
-
   const { donation, setDonation, refetch, isLoading, error } = useDonation();
   const [totalEarned, setTotalEarned] = useState<number>(0);
 
+  // Fetch total earnings
   useEffect(() => {
     const fetchDonations = async () => {
       if (!getProfileData?.id) return;
@@ -45,6 +45,26 @@ const Home = () => {
     fetchDonations();
   }, [getProfileData?.id]);
 
+  // 💸 Send a donation from logged-in user to the profile being viewed
+  const handleSendDonation = async () => {
+    if (!user?.id || !getProfileData?.id) {
+      console.error("Missing donor or recipient ID");
+      return;
+    }
+
+    // Fill in donation data
+    setDonation({
+      amount: 10, // hardcoded for now, you can make this dynamic
+      specialMessage: "You're amazing! 🙌",
+      socialURLOrBuyMeACoffee: `https://buymeacoffee.com/${user.username}`,
+      donorId: user.id,
+      recipientId: Number(getProfileData.id),
+    });
+
+    // Call refetch (which triggers the donation POST)
+    await refetch();
+  };
+
   return (
     <div className="w-full h-auto relative">
       <HeaderH />
@@ -61,7 +81,7 @@ const Home = () => {
                 <AvatarImage
                   src={getProfileData?.avatarImage}
                   className="cursor-pointer"
-                  onClick={() => router.push("/donation-C")}
+                  onClick={() => router.push("/donation_C")}
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
@@ -87,17 +107,24 @@ const Home = () => {
 
           <div className="inline-flex flex-col justify-start items-start gap-6">
             <div className="inline-flex justify-start items-center gap-4">
-              <span className="text-xl font-semibold  leading-7">Earning</span>
+              <span className="text-xl font-semibold leading-7">Earning</span>
               <Date />
             </div>
             <div>
-              <span className="text-4xl font-bold">
-                ${totalEarned}
-              </span>
+              <span className="text-4xl font-bold">${totalEarned}</span>
             </div>
+          </div>
+
+          {/* 💰 TEMPORARY TEST DONATION BUTTON */}
+          <div className="pt-4">
+            <Button onClick={handleSendDonation} disabled={isLoading}>
+              {isLoading ? "Sending Donation..." : "Send $10 Donation"}
+            </Button>
+            {error && <p className="text-red-500 mt-2">Error: {error}</p>}
           </div>
         </div>
 
+        {/* RECENT TRANSACTIONS */}
         <div className="w-[907px] h-auto absolute top-[281px] inline-flex flex-col justify-start items-start gap-3">
           <div className="inline-flex justify-between gap-[550px]">
             <span className="text-base font-semibold ">
@@ -119,7 +146,7 @@ const Home = () => {
                     <span className="text-sm font-medium leading-tight">
                       *name here*
                     </span>
-                    <span className="text-xs font-normal  leading-none">
+                    <span className="text-xs font-normal leading-none">
                       *social link here*
                     </span>
                   </div>
@@ -127,7 +154,7 @@ const Home = () => {
                     <span className="text-base font-bold leading-tight">
                       + *amount of money donated here*
                     </span>
-                    <span className="text-[#71717A] text-xs font-normal  leading-none">
+                    <span className="text-[#71717A] text-xs font-normal leading-none">
                       *what time ago here*
                     </span>
                   </div>
