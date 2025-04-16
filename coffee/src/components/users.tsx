@@ -55,7 +55,7 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
                   className="cursor-pointer"
                   src={user.avatarImage || ""}
                   onClick={() =>
-                    router.push(`/donation-C/${user.id ?? user.userId}`)
+                    router.push(`/donation-Creator/${user.id ?? user.userId}`)
                   }
                 />
                 <AvatarFallback>
@@ -69,7 +69,7 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
             <Button
               className="bg-[#F4F4F5] flex items-center gap-1"
               onClick={() =>
-                router.push(`/donation-C/${user.id ?? user.userId}`)
+                router.push(`/donation-Creator/${user.id ?? user.userId}`)
               }
             >
               <span className="text-sm text-black font-medium leading-tight">

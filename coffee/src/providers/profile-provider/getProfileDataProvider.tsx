@@ -5,14 +5,14 @@ import {
   createContext,
   useContext,
   useState,
-  useCallback,
   useEffect,
+  ReactNode,
 } from "react";
 import { useUserData } from "../AuthenticationProvider";
 import axios from "axios";
 
 type GetProfileDataContextType = {
-  getProfileData: UserProfile;
+  getProfileData: UserProfile | undefined;
   getRefetch: () => Promise<void>;
   setGetProfileData: (account: UserProfile) => void;
   isLoading: boolean;
@@ -26,35 +26,36 @@ const GetProfileDataContext = createContext<
 export const GetProfileDataProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
   const decodedToken = useUserData();
-
   const [getProfileData, setGetProfileData] = useState<UserProfile>();
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
+    if (!decodedToken?.id) return; // ✅ Guard condition
     setIsLoading(true);
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:4000/profile/${decodedToken?.id}`
+        `http://localhost:4000/profile/${decodedToken.id}`
       );
 
-      const data = response.data.profileData;
-
-      setGetProfileData(data);
+      setGetProfileData(response.data.profileData);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
-    fetchData();
-  }, [decodedToken]);
+    if (decodedToken?.id) {
+      fetchData();
+    }
+  }, [decodedToken?.id]);
+
   return (
     <GetProfileDataContext.Provider
       value={{

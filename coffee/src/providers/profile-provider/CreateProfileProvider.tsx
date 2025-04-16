@@ -5,31 +5,43 @@ import {
   createContext,
   useContext,
   useState,
-  useCallback,
   useEffect,
+  ReactNode,
 } from "react";
 import { useUserData } from "../AuthenticationProvider";
 
+// Define the type for your profile creation state
+type CreateProfile = {
+  image: string | null;
+  name: string | null;
+  about: string | null;
+  socialMediaURL: string | null;
+  userID: number | null;
+};
+
+// Define the context shape
 type CreateProfileContextType = {
   createProfile: CreateProfile;
+  setCreateProfile: (profile: CreateProfile) => void;
   refetch: () => Promise<void>;
-  setCreateProfile: (account: CreateProfile) => void;
   isLoading: boolean;
   error: string | null;
 };
 
+// Create context
 const CreateProfileContext = createContext<
-  CreateProfileContextType | undefined  
+  CreateProfileContextType | undefined
 >(undefined);
 
+// Provider component
 export const CreateProfileProvider = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) => {
-  const  decodedToken   = useUserData();
+  const router = useRouter();
+  const decodedToken = useUserData();
 
-const router = useRouter()
   const [createProfile, setCreateProfile] = useState<CreateProfile>({
     image: null,
     name: null,
@@ -38,15 +50,14 @@ const router = useRouter()
     userID: null,
   });
 
-
-console.log(createProfile)
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
-
+  // Fetch logic to create profile
+  const refetch = async () => {
     setIsLoading(true);
     setError(null);
+
     try {
       const response = await fetch("http://localhost:4000/profile", {
         method: "POST",
@@ -59,16 +70,24 @@ console.log(createProfile)
           name: createProfile.name,
           about: createProfile.about,
           socialMediaURL: createProfile.socialMediaURL,
-          userId: createProfile?.userID,
+          userId: createProfile.userID,
         }),
       });
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Server responded with error: ${text}`);
+      }
+
       const data = await response.json();
 
-      if(data.success){
-        router.push('/payment')
+      if (data.success) {
+        router.push("/payment");
+      } else {
+        throw new Error(data.message || "Failed to create profile");
       }
-    } catch (error) {
-      setError(error instanceof Error ? error.message : "Unknown error");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +98,7 @@ console.log(createProfile)
       value={{
         createProfile,
         setCreateProfile,
-        refetch: fetchData,
+        refetch,
         isLoading,
         error,
       }}
@@ -89,11 +108,12 @@ console.log(createProfile)
   );
 };
 
+// Hook to use the context
 export const useCreateProfile = () => {
   const context = useContext(CreateProfileContext);
   if (!context) {
     throw new Error(
-      "useCreateAccount must be used within a CreateAccountProvider"
+      "useCreateProfile must be used within a CreateProfileProvider"
     );
   }
   return context;
