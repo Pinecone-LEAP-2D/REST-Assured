@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useGetProfilAlleData } from "@/providers/profile-provider/getProfileAllData";
 
@@ -55,7 +54,9 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
                 <AvatarImage
                   className="cursor-pointer"
                   src={user.avatarImage || ""}
-                  onClick={() => router.push(`/donation-C/${user.id ?? user.userId}`)}
+                  onClick={() =>
+                    router.push(`/donation-C/${user.id ?? user.userId}`)
+                  }
                 />
                 <AvatarFallback>
                   {user.name?.slice(0, 2).toUpperCase() || "CN"}
@@ -67,7 +68,9 @@ export const UserList = ({ searchTerm }: { searchTerm: string }) => {
             </div>
             <Button
               className="bg-[#F4F4F5] flex items-center gap-1"
-              onClick={() => router.push(`/donation-C/${user.id ?? user.userId}`)}
+              onClick={() =>
+                router.push(`/donation-C/${user.id ?? user.userId}`)
+              }
             >
               <span className="text-sm text-black font-medium leading-tight">
                 View Profile

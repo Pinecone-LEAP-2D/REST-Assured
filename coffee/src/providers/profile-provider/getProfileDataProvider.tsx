@@ -1,38 +1,40 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  useEffect,
-} from "react";
-import { useUserData } from "../AuthenticationProvider";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
+type UserProfile = {
+  id: number;
+  name: string;
+  about: string;
+  avatarImage: string;
+  socialMediaURL: string;
+  backgroundImage: string;
+  successMessage: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: number;
+};
 
-type GetProfileDataContextType = {
-  getProfileData: UserProfile;
-  getRefetch: () => Promise<void>;
-  setGetProfileData: (account: UserProfile) => void;
+type GetProfileByIdContextType = {
+  profileData: UserProfile | null;
   isLoading: boolean;
   error: string | null;
 };
 
-const GetProfileDataContext = createContext<
-  GetProfileDataContextType | undefined
+const GetProfileByIdContext = createContext<
+  GetProfileByIdContextType | undefined
 >(undefined);
 
-export const GetProfileDataProvider = ({
+export const GetProfileByIdProvider = ({
   children,
+  userId,
 }: {
   children: React.ReactNode;
+  userId: number;
 }) => {
-  const decodedToken = useUserData();
-
-  const [getProfileData, setGetProfileData] = useState<UserProfile>();
-
+  const [profileData, setProfileData] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,41 +43,34 @@ export const GetProfileDataProvider = ({
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:4000/profile/${decodedToken?.id}`
+        `http://localhost:4000/profiles/${userId}`
       );
-
-      const data = response.data.profileData      ;
-
-      setGetProfileData(data);
+      setProfileData(response.data.profileData);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
-    fetchData();
-  }, [decodedToken]);
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
+
   return (
-    <GetProfileDataContext.Provider
-      value={{
-        getProfileData,
-        setGetProfileData,
-        getRefetch: fetchData,
-        isLoading,
-        error,
-      }}
-    >
+    <GetProfileByIdContext.Provider value={{ profileData, isLoading, error }}>
       {children}
-    </GetProfileDataContext.Provider>
+    </GetProfileByIdContext.Provider>
   );
 };
 
-export const useGetProfileData = () => {
-  const context = useContext(GetProfileDataContext);
+export const useGetProfileById = () => {
+  const context = useContext(GetProfileByIdContext);
   if (!context) {
     throw new Error(
-      "useGetProfileData must be used within a GetProfileDataProvider"
+      "useGetProfileById must be used within a GetProfileByIdProvider"
     );
   }
   return context;

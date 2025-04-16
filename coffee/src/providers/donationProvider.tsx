@@ -43,7 +43,7 @@ export const DonationProvider = ({
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("http://localhost:4000/users", {
+      const response = await fetch("http://localhost:4000/donations", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,13 +59,12 @@ export const DonationProvider = ({
 
       const data = await response.json();
 
-      if (data.success) {
-      
-      } else {
+      if (!data.success) {
         setError(data.message);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error sending donation:", error);
+      setError("Failed to send donation.");
     } finally {
       setIsLoading(false);
     }
