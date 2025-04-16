@@ -1,4 +1,5 @@
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 export const Message_D = () => {
   return (
     <div className="mt-[20px] flex-col">
@@ -6,7 +7,7 @@ export const Message_D = () => {
         Special message
       </span>
       <div>
-        <Input
+        <Textarea
           className="w-full"
           placeholder="Please write your message here"
         />

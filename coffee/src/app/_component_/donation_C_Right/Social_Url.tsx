@@ -8,11 +8,7 @@ export const Social_Url_D = ({ user }: { user: any }) => {
         Enter BuyMeCoffee or social account URL:
       </span>
       <div>
-        <Input
-          className="w-full"
-          placeholder="buymeacoffee.com/"
-          defaultValue={user?.socialMediaURL || ""}
-        />
+        <Input className="w-full" placeholder="buymeacoffee.com/" />
       </div>
     </div>
   );

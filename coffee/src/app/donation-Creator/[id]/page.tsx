@@ -16,7 +16,7 @@ import { CameraIcon } from "lucide-react";
 const getProfileById = async (id: string) => {
   const res = await fetch(`http://localhost:4000/profile/${id}`);
   if (!res.ok) throw new Error("User not found");
-  return await res.json(); // expects { profileData }
+  return await res.json();
 };
 
 const Donation_C = () => {
@@ -28,7 +28,7 @@ const Donation_C = () => {
       try {
         if (id) {
           const data = await getProfileById(id);
-          setProfile(data.profileData); // now contains id
+          setProfile(data.profileData);
         }
       } catch (err) {
         console.error("Failed to fetch user:", err);
