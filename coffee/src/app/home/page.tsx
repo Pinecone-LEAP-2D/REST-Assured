@@ -13,6 +13,8 @@ import { Buttons } from "../_component_/_home_/Buttons";
 import { useGetProfileData } from "@/providers/profile-provider/getProfileDataProvider";
 import { useUserData } from "@/providers/AuthenticationProvider";
 import { useDonation } from "@/providers/donationProvider";
+import { toast } from "react-toastify";
+import { useGetExplore } from "@/providers/getEcploreProvider";
 
 const Home = () => {
   const router = useRouter();
@@ -102,12 +104,12 @@ const Home = () => {
                 </span>
               </div>
             </div>
-            <div className="flex justify-center items-center gap-2">
-              <Button
-                className="text-white cursor-pointer"
-                onClick={handleCopyLink}
-              >
-                <Copy className="mr-2" /> Share page link
+            <div
+              className="flex justify-center items-center ml-[397px] gap-2"
+              onClick={() => toast.success("successfully copied link!")}
+            >
+              <Button className="text-white cursor-pointer">
+                <Copy /> Share page link
               </Button>
             </div>
           </div>

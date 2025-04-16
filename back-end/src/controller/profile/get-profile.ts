@@ -6,7 +6,7 @@ export const getProfile = async (req: Request, res: Response) => {
   try {
     const profileData = await prisma.profile.findUnique({
       where: {
-        userId: Number(id),
+        id: Number(id),
       },
     });
 
@@ -23,6 +23,7 @@ export const getProfile = async (req: Request, res: Response) => {
       profileData: profileData,
     });
   } catch (error) {
+    console.error("Error fetching profile:", error);
     res.status(500).json({
       success: false,
       message: "Failed to find user",
