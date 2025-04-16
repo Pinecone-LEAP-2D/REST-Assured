@@ -12,6 +12,7 @@ import { Social_Url_D } from "@/app/_component_/donation_C_Right/Social_Url";
 import { Support_D } from "@/app/_component_/donation_C_Right/Support_Button";
 import { Button } from "@/components/ui/button";
 import { CameraIcon } from "lucide-react";
+import { Profile_S } from "@/app/_component_/donation_Supporter/Profile_Supporter";
 
 const getProfileById = async (id: string) => {
   const res = await fetch(`http://localhost:4000/profile/${id}`);
@@ -44,13 +45,10 @@ const Donation_C = () => {
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />
       <div className="w-full h-[319px] relative bg-[#F4F4F5] overflow-hidden inline-flex justify-center items-center gap-2">
-        <Button className="w-[181px] bg-black text-white">
-          <CameraIcon /> Add a cover image
-        </Button>
       </div>
 
       <div className="w-[632px] h-auto justify-start items-start gap-5 absolute top-[289px] left-[80px]">
-        <Profile_C user={profile} />
+        <Profile_S user={profile} />
         <Social_URL_C user={profile} />
         <Recent_S_C user={profile} />
       </div>

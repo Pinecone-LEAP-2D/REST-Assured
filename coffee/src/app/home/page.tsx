@@ -129,7 +129,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* RECENT TRANSACTIONS */}
         <div className="w-[907px] h-auto inline-flex flex-col justify-start items-start gap-3 mt-[20px]">
           <div className="inline-flex justify-between w-full">
             <span className="text-base font-semibold">Recent transactions</span>
