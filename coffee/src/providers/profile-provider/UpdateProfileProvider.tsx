@@ -45,7 +45,6 @@ export const UpdateProfileProvider = ({
     userID: null,
   });
 
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -54,31 +53,28 @@ export const UpdateProfileProvider = ({
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:4000/profile/${decodedToken?.id}`,
+        `http://localhost:4000/profile/d/${decodedToken?.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-          avatarImage: updateProfile.image,
-          backgroundImage: null,
-          name: updateProfile.name,
-          about: updateProfile.about,
-          socialMediaURL: updateProfile.socialMediaURL,
-        }),
-     
+            avatarImage: updateProfile.image,
+            backgroundImage: null,
+            name: updateProfile.name,
+            about: updateProfile.about,
+            socialMediaURL: updateProfile.socialMediaURL,
+          }),
         }
       );
-  
-  
+      console.log(response);
     } catch (error) {
-     console.log(error)
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <UpdateProfileContext.Provider
