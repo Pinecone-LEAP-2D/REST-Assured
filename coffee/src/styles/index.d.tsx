@@ -45,3 +45,10 @@ type Payment = {
   cvc: string | null;
 };
 // types.ts
+type Donation = {
+  amount: number | null;
+  specialMessage: string | null;
+  socialURLOrBuyMeACoffee: string | null;
+  donorId: number | null;
+  recipientId: number | null;
+};

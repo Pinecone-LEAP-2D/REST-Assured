@@ -18,8 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <DonationProvider>
+
           <AuthenticationProvider>
+          <DonationProvider>
             <CreateProfileProvider>
               <UpdateProfileProvider>
                 <ChangePasswordProvider>
@@ -37,8 +38,9 @@ export default function RootLayout({
                 </ChangePasswordProvider>
               </UpdateProfileProvider>
             </CreateProfileProvider>
+            </DonationProvider>
           </AuthenticationProvider>
-        </DonationProvider>
+      
       </body>
     </html>
   );
