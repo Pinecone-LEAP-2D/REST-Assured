@@ -14,7 +14,6 @@ import { useGetProfileData } from "@/providers/profile-provider/getProfileDataPr
 import { useUserData } from "@/providers/AuthenticationProvider";
 import { useDonation } from "@/providers/donationProvider";
 import { toast } from "react-toastify";
-import { useGetExplore } from "@/providers/getEcploreProvider";
 
 const Home = () => {
   const router = useRouter();

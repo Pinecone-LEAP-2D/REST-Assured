@@ -12,7 +12,7 @@ import { Support_D } from "@/app/_component_/donation_C_Right/Support_Button";
 import { Profile_S } from "@/app/_component_/donation_Supporter/Profile_Supporter";
 
 const getProfileById = async (id: string) => {
-  const res = await fetch(`http://localhost:4000/profile/${id}`);
+  const res = await fetch(`http://localhost:4000/profile/d/${id}`);
   if (!res.ok) throw new Error("User not found");
   return await res.json();
 };
