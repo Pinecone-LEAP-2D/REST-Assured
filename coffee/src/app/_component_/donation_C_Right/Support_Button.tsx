@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button";
 export const Support_D = ({ userId }: { userId: number }) => {
   const handleSupportClick = () => {
     console.log("Support clicked for user ID:", userId);
-    // TODO: Add support logic here
-    // Example: open modal, redirect to checkout, etc.
   };
 
   return (

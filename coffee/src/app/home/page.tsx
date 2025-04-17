@@ -87,7 +87,7 @@ const Home = () => {
         <div className="w-[907px] h-auto p-6 rounded-lg outline border-[#E4E4E7] inline-flex flex-col justify-start items-start gap-3">
           <div className="inline-flex justify-between w-full">
             <div className="flex justify-start items-center gap-3">
-              <Avatar>
+              <Avatar onClick={() => router.push("/donation_Creator")}>
                 <AvatarImage
                   src={getProfileData?.avatarImage}
                   className="cursor-pointer"

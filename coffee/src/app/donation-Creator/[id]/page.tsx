@@ -2,7 +2,6 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HeaderH } from "@/app/_component_/_homeSettings_/HeaderH";
-import { Profile_C } from "@/app/_component_/donation_C_Left/Profile";
 import { Recent_S_C } from "@/app/_component_/donation_C_Left/Recent_Supporters";
 import { Social_URL_C } from "@/app/_component_/donation_C_Left/Social_Url";
 import { Amount_C } from "@/app/_component_/donation_C_Right/Amount";
@@ -10,8 +9,6 @@ import { Buy_Coffee_C } from "@/app/_component_/donation_C_Right/Buy_Coffee";
 import { Message_D } from "@/app/_component_/donation_C_Right/Message_D";
 import { Social_Url_D } from "@/app/_component_/donation_C_Right/Social_Url";
 import { Support_D } from "@/app/_component_/donation_C_Right/Support_Button";
-import { Button } from "@/components/ui/button";
-import { CameraIcon } from "lucide-react";
 import { Profile_S } from "@/app/_component_/donation_Supporter/Profile_Supporter";
 
 const getProfileById = async (id: string) => {
