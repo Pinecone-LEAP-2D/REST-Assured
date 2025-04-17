@@ -14,7 +14,7 @@ export const Buttons_Explore = () => {
       <Button className="w-[250px] bg-black text-white justify-start outline-none cursor-pointer">
         Explore
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer">
+      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer" onClick={() => router.push("/donation_Creator")}>
         View page <ExternalLink />{" "}
       </Button>
       <Button

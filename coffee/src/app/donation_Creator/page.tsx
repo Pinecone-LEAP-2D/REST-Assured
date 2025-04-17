@@ -10,7 +10,7 @@ import { Profile_Self } from "../_component_/donation-self/profile-self";
 import { Social_URL_Self } from "../_component_/donation-self/social-self";
 import { Recent_Self } from "../_component_/donation-self/recent-self";
 import { Buy_Coffee_Self } from "../_component_/donation-self/buy-self-coffee";
-const Donation_C = () => {
+const donation_Creator = () => {
   return (
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />
@@ -38,4 +38,4 @@ const Donation_C = () => {
     </div>
   );
 };
-export default Donation_C;
+export default donation_Creator;

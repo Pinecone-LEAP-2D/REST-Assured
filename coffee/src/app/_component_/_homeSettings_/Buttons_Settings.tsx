@@ -17,10 +17,10 @@ export const Buttons_Settings = () => {
       >
         Explore
       </Button>
-      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer pointer-events-none">
+      <Button className="w-[250px] bg-white text-black justify-start  hover:text-white cursor-pointer" onClick={() => router.push("/donation_Creator")}>
         View page <ExternalLink />{" "}
       </Button>
-      <Button className="w-[250px] bg-black text-white justify-start cursor-pointerr">
+      <Button className="w-[250px] bg-black text-white justify-start cursor-pointer">
         Account settings
       </Button>
     </div>
