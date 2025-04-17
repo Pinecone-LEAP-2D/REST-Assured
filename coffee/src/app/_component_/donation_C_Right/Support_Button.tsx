@@ -11,11 +11,14 @@ import {
 } from "@/components/ui/dialog";
 import QRCode from "react-qr-code";
 import { useRouter } from "next/navigation";
+import { useDonation } from "@/providers/donationProvider";
 
 export const Support_D = ({ userId }: { userId: number }) => {
+  const {refetch , isLoading} =  useDonation()
   const router = useRouter();
   const handleSupportClick = () => {
     console.log("Support clicked for user ID:", userId);
+    refetch
   };
   const value = "iasuhdaisld";
 
