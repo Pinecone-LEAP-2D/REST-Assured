@@ -1,7 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  ReactNode,
+} from "react";
 
 type Donation = {
   amount: number | null;
@@ -9,6 +15,12 @@ type Donation = {
   socialURLOrBuyMeACoffee: string | null;
   donorId: number | null;
   recipientId: number | null;
+};
+
+type DonationResponse = {
+  success: boolean;
+  donation?: Donation;
+  message?: string;
 };
 
 type DonationContextType = {
@@ -23,11 +35,7 @@ const DonationContext = createContext<DonationContextType | undefined>(
   undefined
 );
 
-export const DonationProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const DonationProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,37 +46,38 @@ export const DonationProvider = ({
     donorId: null,
     recipientId: null,
   });
+  console.table(donation);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true);
     setError(null);
+
     try {
-      const response = await fetch("http://localhost:4000/donations", {
+      const response = await fetch("http://localhost:4000/donation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          amount: donation.amount,
-          specialMessage: donation.specialMessage,
-          socialURLOrBuyMeACoffee: donation.socialURLOrBuyMeACoffee,
-          donorId: donation.donorId,
-          recipientId: donation.recipientId,
-        }),
+        body: JSON.stringify(donation),
       });
-
-      const data = await response.json();
-
-      if (!data.success) {
-        setError(data.message);
+    
+      if (!response.ok) {
+        throw new Error("Network error");
       }
-    } catch (error) {
-      console.error("Error sending donation:", error);
+
+      const data: DonationResponse = await response.json();
+console.log(data)
+      if (data.success && data.donation) {
+        setDonation(data.donation);
+      } else {
+        setError(data.message || "Something went wrong.");
+      }
+    } catch {
       setError("Failed to send donation.");
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [donation, router]);
 
   return (
     <DonationContext.Provider

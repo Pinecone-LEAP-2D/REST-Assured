@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useUserData } from "../AuthenticationProvider";
-
+import axios from "axios";
 type PaymentContextType = {
   payment: Payment;
   CreateBankCard: () => Promise<void>;
@@ -15,15 +15,12 @@ type PaymentContextType = {
 
 const PaymentContext = createContext<PaymentContextType | undefined>(undefined);
 
-export const PaymentProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const PaymentProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const decodedToken = useUserData();
+
   const [payment, setPayment] = useState<Payment>({
-    id: decodedToken?.id as number,
+    id: decodedToken?.id ?? null,
     country: null,
     firstName: null,
     lastName: null,
@@ -32,9 +29,29 @@ export const PaymentProvider = ({
     year: null,
     cvc: null,
   });
+  console.log(payment)
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const getBankCardData = async (id: number | undefined) => {
+    if (!id) return;
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get(`http://localhost:4000/bankCard/${id}`);
+      console.log(response)
+      
+      setPayment(response.data);
+    } catch (error) {
+      console.error(error);
+      setError(error instanceof Error ? error.message : "Error fetching card data");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const CreateBankCard = async () => {
     setIsLoading(true);
@@ -67,7 +84,6 @@ export const PaymentProvider = ({
       });
 
       const data = await response.json();
-      console.log(data);
       if (data.success) {
         router.push("/home");
       } else {
@@ -76,6 +92,7 @@ export const PaymentProvider = ({
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {
+      await getBankCardData(decodedToken?.id);
       setIsLoading(false);
     }
   };
@@ -90,31 +107,28 @@ export const PaymentProvider = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: payment.id,
-          country: payment.country,
-          firstName: payment.firstName,
-          lastName: payment.lastName,
-          cardNumber: payment.cardNumber,
-          expiryDate: payment.expiryDate,
-          year: payment.year,
-          cvc: payment.cvc,
-        }),
+        body: JSON.stringify(payment),
       });
 
       const data = await response.json();
-      console.log(data);
       if (data.success) {
         router.push("/login");
       } else {
-        setError(data.message || "Payment failed.");
+        setError(data.message || "Payment update failed.");
       }
     } catch (error) {
       setError(error instanceof Error ? error.message : "Unknown error");
     } finally {
+      await getBankCardData(decodedToken?.id);
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (decodedToken?.id) {
+      getBankCardData(decodedToken.id);
+    }
+  }, [decodedToken?.id]);
 
   return (
     <PaymentContext.Provider
