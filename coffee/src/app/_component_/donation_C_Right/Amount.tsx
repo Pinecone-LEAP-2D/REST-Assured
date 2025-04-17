@@ -10,20 +10,19 @@ export const Amount_C = () => {
   return (
     <div className="flex-col inline-flex">
       <span className="text-sm font-medium leading-none">Select amount:</span>
-      <div className="inline-flex gap-3">
-        {amounts.map((amount) => (
-          <Button
-            key={amount}
-            className={`w-auto gap-1 ${
-              selectedAmount === amount
-                ? "bg-black text-white"
-                : "bg-[#F4F4F5] text-black hover:text-white"
-            }`}
-            onClick={() => setSelectedAmount(amount)}
-          >
-            <Coffee /> ${amount}
-          </Button>
-        ))}
+      <div className="inline-flex gap-3 mt-[8px]">
+        <Button className="w-auto bg-[#F4F4F5] text-black hover:text-white">
+          <Coffee /> $1
+        </Button>
+        <Button className="w-auto bg-[#F4F4F5] text-black hover:text-white">
+          <Coffee /> $2
+        </Button>
+        <Button className="w-auto bg-[#F4F4F5] text-black hover:text-white">
+          <Coffee /> $5
+        </Button>
+        <Button className="w-auto bg-[#F4F4F5] text-black hover:text-white">
+          <Coffee /> $10
+        </Button>
       </div>
     </div>
   );
