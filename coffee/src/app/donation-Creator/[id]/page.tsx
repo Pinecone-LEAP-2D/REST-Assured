@@ -44,8 +44,7 @@ const Donation_C = () => {
   return (
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />
-      <div className="w-full h-[319px] relative bg-[#F4F4F5] overflow-hidden inline-flex justify-center items-center gap-2">
-      </div>
+      <div className="w-full h-[319px] relative bg-[#F4F4F5] overflow-hidden inline-flex justify-center items-center gap-2"></div>
 
       <div className="w-[632px] h-auto justify-start items-start gap-5 absolute top-[289px] left-[80px]">
         <Profile_S user={profile} />

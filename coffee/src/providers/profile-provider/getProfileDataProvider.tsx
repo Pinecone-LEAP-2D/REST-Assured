@@ -34,7 +34,9 @@ export const GetProfileDataProvider = ({
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    if (!decodedToken?.id) return; // ✅ Guard condition
+    if (!decodedToken?.id) return;
+    console.log(decodedToken.id);
+
     setIsLoading(true);
     setError(null);
     try {
