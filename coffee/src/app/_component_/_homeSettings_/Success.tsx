@@ -15,12 +15,12 @@ export const Success = () => {
       updateProfile.socialMediaURL ||
       (getProfileData?.socialMediaURL as string),
     userID: updateProfile.userID,
-    successMessage: ''
+    ConfirmationMessage: ''
 
   });
 
   const onConfirmationmessageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormValue((prev) => ({ ...prev, successMessage: e.target.value }));
+    setFormValue((prev) => ({ ...prev, ConfirmationMessage: e.target.value }));
   }
   return (
     <div className="w-full p-6 rounded-lg outline border-[#E4E4E7] flex-col inline-flex gap-6">

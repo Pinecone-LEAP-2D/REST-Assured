@@ -2,43 +2,43 @@ import { Response, Request } from "express";
 import prisma from "../../prismaClient";
 
 export const updateProfile = async (req: Request, res: Response) => {
-  const { avatarImage, name, about, socialMediaURL, backgroundImage, userId } =
-    req.body;
+  const { avatarImage, name, about, socialMediaURL, backgroundImage, ConfirmationMessage } = req.body;
   const { id } = req.params;
 
   try {
-    const Existingprofile = await prisma.profile.findUnique({
+    const existingProfile = await prisma.profile.findUnique({
       where: { userId: Number(id) },
     });
 
-    if (!Existingprofile) {
-      res.status(500).json({
+    if (!existingProfile) {
+      return res.status(404).json({
         success: false,
-        message: "Failed to update profile",
+        message: "Profile not found",
       });
     }
 
     const updatedProfile = await prisma.profile.update({
       where: { userId: Number(id) },
       data: {
-        avatarImage: avatarImage,
-        name: name,
-        about: about,
-        socialMediaURL: socialMediaURL,
+        avatarImage,
+        name,
+        about,
+        socialMediaURL,
         backgroundImage: backgroundImage || "",
+        ConfirmationMessage,
       },
     });
 
     res.status(200).json({
       success: true,
-      message: "Successfully updated profile",
+      message: "Profile updated successfully",
       profileInfo: updatedProfile,
     });
   } catch (error) {
+    console.error("Update profile error:", error);
     res.status(500).json({
       success: false,
-      message: "Failed to update profile",
-      error: error,
+      message: "An error occurred while updating the profile",
     });
   }
 };
