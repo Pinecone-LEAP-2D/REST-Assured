@@ -16,7 +16,7 @@ export const Header = () => {
         <div className="flex justify-start items-center gap-3">
           <Button
             className="bg-[#F4F4F5] text-black"
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/logIn")}
           >
             Log out
           </Button>

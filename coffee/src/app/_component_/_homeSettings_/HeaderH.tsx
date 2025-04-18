@@ -14,7 +14,7 @@ export const HeaderH = () => {
   const router = useRouter();
   const { getProfileData } = useGetProfileData();
   const handleClick = () => {
-    router.push("/login");
+    router.push("/logIn");
     localStorage.removeItem("token");
   };
   return (

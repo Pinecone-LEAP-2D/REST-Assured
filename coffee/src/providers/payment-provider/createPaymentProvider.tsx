@@ -111,7 +111,7 @@ export const PaymentProvider = ({ children }: { children: React.ReactNode }) => 
 
       const data = await response.json();
       if (data.success) {
-        router.push("/login");
+        router.push("/logIn");
       } else {
         setError(data.message || "Payment update failed.");
       }
