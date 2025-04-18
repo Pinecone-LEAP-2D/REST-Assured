@@ -17,7 +17,7 @@ export const Support_D = ({ userId }: { userId: number }) => {
   const {refetch , isLoading} =  useDonation()
   const router = useRouter();
   const handleSupportClick = () => {
-    console.log("Support clicked for user ID:", userId);
+   
     refetch
   };
   const value = "iasuhdaisld";
@@ -38,7 +38,7 @@ export const Support_D = ({ userId }: { userId: number }) => {
             <DialogTitle>Scan QR Code</DialogTitle>
             <DialogDescription
               className="cursor-pointer"
-              onClick={() => router.push("/donation_Creator/donation-finished")}
+              onClick={() => router.push(`/donation_Creator/donation-finished/${userId}`)}
             >
               Scan the QR code to complete your donation
             </DialogDescription>

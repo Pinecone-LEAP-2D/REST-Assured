@@ -17,6 +17,7 @@ type UpdateProfile = {
   about: string | null;
   socialMediaURL: string | null;
   userID: string | null;
+  successMessage? : string | null
 };
 
 type UpdateProfileContextType = {
@@ -43,6 +44,7 @@ export const UpdateProfileProvider = ({
     about: null,
     socialMediaURL: null,
     userID: null,
+    successMessage:null
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,7 +55,7 @@ export const UpdateProfileProvider = ({
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:4000/profile/d/${decodedToken?.id}`,
+        `http://localhost:4000/profile/${decodedToken?.id}`,
         {
           method: "PUT",
           headers: {
@@ -65,10 +67,11 @@ export const UpdateProfileProvider = ({
             name: updateProfile.name,
             about: updateProfile.about,
             socialMediaURL: updateProfile.socialMediaURL,
+            successMessage:updateProfile.successMessage
           }),
         }
       );
-      console.log(response);
+
     } catch (error) {
       console.log(error);
     } finally {
