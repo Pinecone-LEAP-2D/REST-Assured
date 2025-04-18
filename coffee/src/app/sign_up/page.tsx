@@ -29,7 +29,7 @@ export default function SignUp() {
         <div className="w-1/2 h-full relative flex flex-col justify-center items-center bg-white">
           <Button
             className="absolute top-8 right-8 bg-gray-100 px-4 py-1 rounded-md text-[black] cursor-pointer"
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/logIn")}
           >
             <span className="text-sm font-medium leading-tight">Log in</span>
           </Button>

@@ -26,7 +26,7 @@ export const AuthenticationProvider = ({ children }: { children: React.ReactNode
 
   useEffect(() => {
     if (!token || isExpired) {
-      router.push("/login");
+      router.push("/logIn");
       return;
     }
 
