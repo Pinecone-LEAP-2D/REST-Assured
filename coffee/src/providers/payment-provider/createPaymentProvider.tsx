@@ -29,7 +29,7 @@ export const PaymentProvider = ({ children }: { children: React.ReactNode }) => 
     year: null,
     cvc: null,
   });
-  console.log(payment)
+
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,8 +42,7 @@ export const PaymentProvider = ({ children }: { children: React.ReactNode }) => 
 
     try {
       const response = await axios.get(`http://localhost:4000/bankCard/${id}`);
-      console.log(response)
-      
+ 
       setPayment(response.data);
     } catch (error) {
       console.error(error);
