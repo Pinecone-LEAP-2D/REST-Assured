@@ -87,7 +87,7 @@ const Donation_C = () => {
   };
 
   if (!profile) return <Loading />;
-
+console.log(profile)
   return (
     <div className="w-full h-[1000px] relative overflow-hidden">
       <HeaderH />

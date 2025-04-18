@@ -44,6 +44,7 @@ export const postProfile = async (req: Request, res: Response) => {
         socialMediaURL: socialMediaURL,
         backgroundImage: backgroundImage || "",
         successMessage: "Profile created successfully",
+        ConfirmationMessage:''
       },
     });
 

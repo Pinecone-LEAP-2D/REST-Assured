@@ -17,7 +17,7 @@ type UpdateProfile = {
   about: string | null;
   socialMediaURL: string | null;
   userID: string | null;
-  successMessage? : string | null
+  ConfirmationMessage? : string | null
 };
 
 type UpdateProfileContextType = {
@@ -44,7 +44,7 @@ export const UpdateProfileProvider = ({
     about: null,
     socialMediaURL: null,
     userID: null,
-    successMessage:null
+    ConfirmationMessage:null
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -67,7 +67,7 @@ export const UpdateProfileProvider = ({
             name: updateProfile.name,
             about: updateProfile.about,
             socialMediaURL: updateProfile.socialMediaURL,
-            successMessage:updateProfile.successMessage
+            ConfirmationMessage:updateProfile.ConfirmationMessage
           }),
         }
       );
